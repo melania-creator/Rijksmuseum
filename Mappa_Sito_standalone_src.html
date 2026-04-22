@@ -1593,7 +1593,12 @@ canvasWrap.addEventListener('click', (e) => {
 
 /* ========= INIT ========= */
 window.addEventListener('load', () => {
-  fitToView();
+  scale = 0.7;
+  const home = nodeById.home;
+  const W = canvasWrap.clientWidth, H = canvasWrap.clientHeight;
+  tx = W/2 - home.x * scale;
+  ty = H/2 - home.y * scale;
+  applyTransform();
 });
 window.addEventListener('resize', () => {
   // keep scale, reclamp
