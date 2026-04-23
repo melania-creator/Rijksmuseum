@@ -1,0 +1,2536 @@
+<!DOCTYPE html>
+<!-- saved from url=(0311)https://b862d95b-9991-4bff-8903-a10448352600.claudeusercontent.com/v1/design/projects/b862d95b-9991-4bff-8903-a10448352600/serve/Mappa_Sito_standalone_src.html?t=578e6faf354583deb563a5e2e688c3280eea89084f5541be0c74081af45fd75e.81149142-19c2-40d1-94b4-e11e1de59180.58e3eaba-e079-437d-b06e-d3b02e9a341d.1776849477 -->
+<html lang="it"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style data-omelette-injected="">html,body{background:transparent}</style><script data-omelette-injected="">(()=>{var $=["https://claude.ai","https://preview.claude.ai","https://eap-omelette.claude.ai"];var F=30000;var A=3000;document.addEventListener("DOMContentLoaded",()=>{const Q="transform-react-jsx-source";document.querySelectorAll('script[type="text/babel"],script[type="text/jsx"]').forEach((J,V)=>{const X=J.getAttribute("data-plugins")||"";if(X.indexOf(Q)<0){J.setAttribute("data-plugins",X?`${X},${Q}`:Q)}if(!J.hasAttribute("data-filename")){J.setAttribute("data-filename",J.getAttribute("src")||`inline-${V}`)}})});var W=window.parent;if(W&&W!==window){const Q=(z,k)=>{try{W.postMessage({__omelette_log:true,type:z,data:k},"*")}catch{}};["log","warn","error"].forEach((z)=>{const k=console[z];console[z]=(...C)=>{const D=C.map((w)=>{try{return typeof w==="object"?JSON.stringify(w):String(w)}catch{try{return String(w)}catch{return"[unstringifiable]"}}}).join(" ");Q(z,D);k.apply(console,C)}});window.addEventListener("error",(z)=>{const k=z.target;if(k&&k!==window&&k.tagName){const C=k.src||k.href||"";Q("resource_error",`${k.tagName} failed to load: ${C}`)}else{Q("error",`${z.message||"Unknown error"} at ${z.filename||"?"}:${z.lineno||0}:${z.colno||0}`)}},true);window.addEventListener("unhandledrejection",(z)=>{const k=z.reason;const C=k instanceof Error?`${k.message} ${k.stack}`:String(k);Q("error",`Unhandled rejection: ${C}`)});const J=()=>{try{W.postMessage({type:"omelette:height",height:document.documentElement.scrollHeight},"*")}catch{}};if(document.readyState==="complete")J();else window.addEventListener("load",J);if(window.ResizeObserver)new ResizeObserver(J).observe(document.documentElement);const V={};let X=0;window.claude={complete(z){return new Promise((k,C)=>{if(!$.length){C(new Error("claude.complete: no parent origin"));return}const D=`c${++X}`;const w=()=>setTimeout(()=>{delete V[D];C(new Error(`claude.complete: no data for ${F/1000}s`))},F);const K=w();V[D]={resolve:k,reject:C,text:"",t:K,arm:w};try{for(const Z of $){W.postMessage({__om_api:true,id:D,body:z},Z)}}catch(Z){clearTimeout(K);delete V[D];C(Z)}})}};const Y={};let h=0;window.omelette={writeFile:(z,k)=>new Promise((C,D)=>{if(!$.length){C();return}const w=`f${++h}`;const K=setTimeout(()=>{delete Y[w];C()},A);Y[w]={resolve:C,reject:D,t:K};try{for(const Z of $){W.postMessage({__om_file:true,id:w,op:"write",path:z,content:k},Z)}}catch{clearTimeout(K);delete Y[w];C()}})};const b=(z)=>{try{return JSON.stringify(z)}catch{return JSON.stringify(String(z))}};window.addEventListener("message",(z)=>{if($.indexOf(z.origin)<0)return;if(z.source!==W)return;const k=z.data;if(!k)return;if(k.__om_file_r){const w=Y[k.id];if(!w)return;clearTimeout(w.t);delete Y[k.id];if(k.ok)w.resolve();else w.reject(new Error(k.error||"write failed"));return}if(k.__om_api_r){const w=V[k.id];if(!w)return;if(k.error!=null){clearTimeout(w.t);delete V[k.id];w.reject(new Error(k.error));return}if(k.chunk!=null){clearTimeout(w.t);w.t=w.arm();w.text+=k.chunk;return}if(k.done){clearTimeout(w.t);delete V[k.id];w.resolve(k.text!=null?k.text:w.text);return}return}if(!k.__om_eval)return;const C=k;const D=(w)=>{z.source.postMessage({...w,__om_eval_r:1,id:C.id},z.origin)};try{const w=(0,eval)(C.code);if(w&&typeof w.then==="function"){w.then((K)=>D({ok:1,v:b(K)}),(K)=>D({ok:0,e:String(K)}))}else{D({ok:1,v:b(w)})}}catch(w){D({ok:0,e:String(w)})}})}})();
+</script>
+
+
+<title>Architettura del sito — Rijksmuseum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./Architettura del sito - Rijksmuseum_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF8F3;
+    --ink: #1a1814;
+    --ink-2: #5a564e;
+    --ink-3: #8d887f;
+    --rule: #d8d3c8;
+    --paper: #ffffff;
+
+    /* colori sezione */
+    --c-home:       #4a4640;
+    --c-visit:      #3B8BD4;
+    --c-whatson:    #BA7517;
+    --c-collection: #1D9E75;
+    --c-stories:    #D85A30;
+    --c-support:    #D4537E;
+    --c-research:   #7F77DD;
+    --c-footer:     #8d887f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 100%; height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow: hidden;
+  }
+
+  /* ========= HEADER ========= */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    padding: 20px 32px;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    z-index: 100;
+    pointer-events: none;
+  }
+  .topbar > * { pointer-events: auto; }
+  .brand {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .brand .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .brand h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .brand .sub {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-top: 2px;
+  }
+
+  .tools {
+    display: flex; gap: 8px; align-items: center;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 6px;
+    box-shadow: 0 4px 18px -8px rgba(0,0,0,.08);
+  }
+  .tools button {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .tools button:hover { background: var(--bg); }
+  .tools .zoom-level {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-3);
+    padding: 0 10px;
+    min-width: 54px;
+    text-align: center;
+  }
+  .tools .divider {
+    width: 1px; height: 20px; background: var(--rule);
+  }
+
+  /* ========= LEGEND ========= */
+  .legend {
+    position: fixed;
+    left: 32px; bottom: 32px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 10px 30px -14px rgba(0,0,0,.12);
+    z-index: 100;
+    max-width: 340px;
+  }
+  .legend h3 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 10px;
+  }
+  .legend-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 14px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px;
+    color: var(--ink);
+  }
+  .legend-swatch {
+    width: 10px; height: 10px; border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .legend-meta {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-3);
+    line-height: 1.6;
+  }
+  .arrow-legend {
+    display: flex; gap: 16px; margin-top: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--ink-2);
+  }
+  .arrow-legend svg { vertical-align: middle; }
+
+  /* ========= INFO BAR ========= */
+  .infobar {
+    position: fixed;
+    right: 32px; bottom: 32px;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    padding: 14px 18px;
+    box-shadow: 0 10px 30px -14px rgba(0,0,0,.12);
+    z-index: 100;
+    max-width: 360px;
+    min-height: 72px;
+    transition: opacity .2s ease;
+  }
+  .infobar .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 6px;
+  }
+  .infobar .title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .infobar .url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-2);
+    word-break: break-all;
+  }
+  .infobar .hint {
+    font-size: 11px;
+    color: var(--ink-3);
+    font-style: italic;
+  }
+
+  /* ========= CANVAS ========= */
+  .canvas-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    cursor: grab;
+  }
+  .canvas-wrap.dragging { cursor: grabbing; }
+
+  .canvas {
+    position: absolute;
+    transform-origin: 0 0;
+    will-change: transform;
+  }
+
+  /* Canvas background pattern */
+  .canvas-bg {
+    position: absolute;
+    top: 0; left: 0;
+    background-image:
+      radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  /* ========= SECTION CLUSTERS ========= */
+  .section-halo {
+    position: absolute;
+    border-radius: 40px;
+    pointer-events: none;
+    opacity: 0.05;
+  }
+  .section-label {
+    position: absolute;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    border-radius: 8px;
+    color: #fff;
+    z-index: 5;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px -4px rgba(0,0,0,0.35), 0 2px 4px rgba(0,0,0,0.15);
+  }
+  .draggable-label {
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .draggable-label:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 22px -6px rgba(0,0,0,0.45), 0 3px 6px rgba(0,0,0,0.2);
+  }
+  .draggable-label.dragging {
+    cursor: grabbing;
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px -6px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.25);
+  }
+  .draggable-label::before {
+    content: "⋮⋮ ";
+    opacity: 0.55;
+    margin-right: 2px;
+    font-weight: 400;
+  }
+
+  /* ========= BACKEND / DATA LAYER NODE ========= */
+  /* Non è una pagina: è il database / API / CMS dietro le quinte */
+  .node.kind-backend .node-card {
+    background:
+      repeating-linear-gradient(
+        135deg,
+        #1a1814 0 10px,
+        #221e18 10px 20px
+      );
+    border-style: dashed !important;
+    border-width: 3px !important;
+    color: #f5f2ea;
+  }
+  .node.kind-backend .node-thumb {
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .node.kind-backend .node-thumb::before { display: none; }
+  .node.kind-backend .backend-viz {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #F5C84C;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+  }
+  .node.kind-backend .backend-viz .cylinder {
+    width: 72px;
+    height: 52px;
+    position: relative;
+  }
+  .node.kind-backend .backend-viz .cylinder::before,
+  .node.kind-backend .backend-viz .cylinder::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 14px;
+    border: 2px solid #F5C84C;
+    border-radius: 50%;
+    background: #1a1814;
+  }
+  .node.kind-backend .backend-viz .cylinder::before { top: 0; }
+  .node.kind-backend .backend-viz .cylinder::after  { bottom: 0; }
+  .node.kind-backend .backend-viz .cylinder .side {
+    position: absolute;
+    top: 7px; bottom: 7px; left: 0; right: 0;
+    border-left: 2px solid #F5C84C;
+    border-right: 2px solid #F5C84C;
+  }
+  .node.kind-backend .backend-viz .cylinder .disc {
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: #F5C84C;
+    opacity: 0.5;
+  }
+  .node.kind-backend .backend-viz .cylinder .disc.d1 { top: 18px; }
+  .node.kind-backend .backend-viz .cylinder .disc.d2 { top: 28px; }
+  .node.kind-backend .backend-viz .label-small {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #F5C84C;
+    opacity: 0.9;
+  }
+  .node.kind-backend .backend-viz .tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .node.kind-backend .backend-viz .tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    border: 1px solid #F5C84C;
+    border-radius: 3px;
+    color: #F5C84C;
+    letter-spacing: 0.1em;
+    background: rgba(245, 200, 76, 0.08);
+  }
+  .node.kind-backend .node-meta {
+    background: #0f0d0a;
+    border-top: 2px dashed #F5C84C;
+  }
+  .node.kind-backend .node-title {
+    color: #F5C84C;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+  }
+  .node.kind-backend .node-url {
+    color: #8d887f;
+    font-style: italic;
+  }
+  .node.kind-backend .node-section-tag {
+    background: #F5C84C !important;
+    color: #1a1814 !important;
+    font-weight: 700;
+  }
+
+  /* ========= NODE CARDS ========= */
+  .node {
+    position: absolute;
+    transition: transform .15s ease;
+  }
+  .node-card {
+    position: relative;
+    background: var(--paper);
+    border: 2px solid;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .2s cubic-bezier(.2,.9,.3,1.2), box-shadow .2s ease;
+  }
+  .node:hover { z-index: 20; }
+  .node:hover .node-card {
+    transform: translateY(-4px);
+  }
+  .node.active .node-card {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+  }
+
+  .node-thumb {
+    width: 100%;
+    display: block;
+    background: linear-gradient(135deg, #f5f2ea 0%, #ece8dd 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .node-thumb::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        135deg,
+        transparent 0 6px,
+        rgba(0,0,0,0.025) 6px 7px
+      );
+  }
+  .node-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    position: relative;
+    z-index: 1;
+    transform-origin: center center;
+    transition: transform .12s ease;
+    pointer-events: none;
+    user-select: none;
+  }
+  /* Edit mode: image becomes draggable / scalable */
+  body.edit-mode .node-thumb {
+    cursor: move;
+    outline: 2px dashed rgba(0,0,0,0);
+    outline-offset: -4px;
+    transition: outline-color .15s ease;
+  }
+  body.edit-mode .node-thumb:hover {
+    outline-color: rgba(255, 120, 30, 0.9);
+  }
+  body.edit-mode .node-thumb.editing {
+    outline-color: #FF7820;
+  }
+  body.edit-mode .node-thumb img {
+    transition: none;
+    pointer-events: auto;
+    cursor: move;
+  }
+  body.edit-mode .node-card { cursor: default; }
+  body.edit-mode .node:hover .node-card { transform: none; }
+  /* Edit hint badge */
+  .edit-hint {
+    position: absolute;
+    left: 6px; bottom: 6px;
+    z-index: 3;
+    background: rgba(255, 120, 30, 0.95);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 3px 6px;
+    border-radius: 3px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .15s ease;
+  }
+  body.edit-mode .node-thumb .edit-hint { opacity: 1; }
+  /* Edit toolbar button active state */
+  .tools button.active {
+    background: #FF7820;
+    color: #fff;
+  }
+  .tools button.active:hover { background: #FF7820; }
+  .node-thumb .placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-3);
+    font-family: 'JetBrains Mono', monospace;
+    z-index: 2;
+  }
+  .node-thumb .placeholder .ph-icon {
+    font-size: 22px;
+    line-height: 1;
+  }
+  .node-thumb .placeholder .ph-label {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .node-thumb .placeholder .ph-filename {
+    font-size: 9px;
+    color: var(--ink-3);
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+
+  .node-meta {
+    padding: 10px 12px;
+    border-top: 1px solid var(--rule);
+    background: #fff;
+  }
+  .node-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .node-url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-3);
+    margin-top: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .node-section-tag {
+    position: absolute;
+    top: 8px; left: 8px;
+    z-index: 2;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 4px;
+    color: #fff;
+    opacity: 0.95;
+  }
+
+  /* Sizing variants — 16:9 to match 1920×1080 screenshots */
+  .node.size-xxl .node-card { width: 680px; }
+  .node.size-xxl .node-thumb { height: 383px; }  /* 680 × 9/16 */
+  .node.size-xl .node-card { width: 420px; }
+  .node.size-xl .node-thumb { height: 236px; }   /* 420 × 9/16 */
+  .node.size-l .node-card { width: 340px; }
+  .node.size-l .node-thumb { height: 191px; }    /* 340 × 9/16 */
+  .node.size-m .node-card { width: 260px; }
+  .node.size-m .node-thumb { height: 146px; }    /* 260 × 9/16 */
+  .node.size-s .node-card { width: 220px; }
+  .node.size-s .node-thumb { height: 124px; }    /* 220 × 9/16 */
+  /* Bigger titles for bigger nodes */
+  .node.size-xxl .node-title { font-size: 26px; }
+  .node.size-xxl .node-url   { font-size: 13px; }
+  .node.size-xl  .node-title { font-size: 16px; }
+  .node.size-xl  .node-url   { font-size: 11px; }
+  .node.size-l   .node-title { font-size: 14px; }
+
+  /* ========= SVG LINKS LAYER ========= */
+  .links-svg {
+    position: absolute;
+    top: 0; left: 0;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .link-path {
+    fill: none;
+    transition: stroke-opacity .2s ease, stroke-width .2s ease;
+  }
+  .link-path.primary {
+    stroke: #2a2620;
+    stroke-width: 2.2;
+    stroke-opacity: 0.55;
+  }
+  .link-path.secondary {
+    stroke: #5a564e;
+    stroke-width: 1.4;
+    stroke-opacity: 0.4;
+  }
+  .link-path.footer-link {
+    stroke: #a7a299;
+    stroke-width: 0.6;
+    stroke-opacity: 0.45;
+    stroke-dasharray: 3 4;
+  }
+  .link-path.highlight {
+    stroke-opacity: 1 !important;
+    stroke-width: 3 !important;
+    stroke: url(#grad-shimmer) !important;
+    stroke-dasharray: 14 6 !important;
+    animation: shimmer-dash 1.2s linear infinite;
+    filter: drop-shadow(0 0 4px rgba(255,120,30,0.6));
+  }
+  @keyframes shimmer-dash {
+    to { stroke-dashoffset: -40; }
+  }
+  .link-path.dimmed {
+    stroke-opacity: 0.08 !important;
+  }
+  .node.dimmed {
+    opacity: 0.25;
+  }
+</style>
+<meta name="ext-resource-dependency" content="img_small/01_home.jpg" data-resource-id="img_01_home_jpg">
+<meta name="ext-resource-dependency" content="img_small/02_visit.jpg" data-resource-id="img_02_visit_jpg">
+<meta name="ext-resource-dependency" content="img_small/03_tickets.jpg" data-resource-id="img_03_tickets_jpg">
+<meta name="ext-resource-dependency" content="img_small/04_practical.jpg" data-resource-id="img_04_practical_jpg">
+<meta name="ext-resource-dependency" content="img_small/05_families.jpg" data-resource-id="img_05_families_jpg">
+<meta name="ext-resource-dependency" content="img_small/06_groups.jpg" data-resource-id="img_06_groups_jpg">
+<meta name="ext-resource-dependency" content="img_small/07_accessibility.jpg" data-resource-id="img_07_accessibility_jpg">
+<meta name="ext-resource-dependency" content="img_small/08_accessibility_statement.jpg" data-resource-id="img_08_accessibility_statement_jpg">
+<meta name="ext-resource-dependency" content="img_small/09_app.jpg" data-resource-id="img_09_app_jpg">
+<meta name="ext-resource-dependency" content="img_small/10_faq_visit.jpg" data-resource-id="img_10_faq_visit_jpg">
+<meta name="ext-resource-dependency" content="img_small/11_education.jpg" data-resource-id="img_11_education_jpg">
+<meta name="ext-resource-dependency" content="img_small/11a_intl_schools.jpg" data-resource-id="img_11a_intl_schools_jpg">
+<meta name="ext-resource-dependency" content="img_small/11b_university_ed.jpg" data-resource-id="img_11b_university_ed_jpg">
+<meta name="ext-resource-dependency" content="img_small/11c_summer_institute.jpg" data-resource-id="img_11c_summer_institute_jpg">
+<meta name="ext-resource-dependency" content="img_small/11d_artist_residence.jpg" data-resource-id="img_11d_artist_residence_jpg">
+<meta name="ext-resource-dependency" content="img_small/12_whatson.jpg" data-resource-id="img_12_whatson_jpg">
+<meta name="ext-resource-dependency" content="img_small/13_nightwatch.jpg" data-resource-id="img_13_nightwatch_jpg">
+<meta name="ext-resource-dependency" content="img_small/14_metamorphoses.jpg" data-resource-id="img_14_metamorphoses_jpg">
+<meta name="ext-resource-dependency" content="img_small/15_fake.jpg" data-resource-id="img_15_fake_jpg">
+<meta name="ext-resource-dependency" content="img_small/16_womensmonth.jpg" data-resource-id="img_16_womensmonth_jpg">
+<meta name="ext-resource-dependency" content="img_small/17_guidedtours.jpg" data-resource-id="img_17_guidedtours_jpg">
+<meta name="ext-resource-dependency" content="img_small/18_past_exhib.jpg" data-resource-id="img_18_past_exhib_jpg">
+<meta name="ext-resource-dependency" content="img_small/19_collection.jpg" data-resource-id="img_19_collection_jpg">
+<meta name="ext-resource-dependency" content="img_small/20_stories.jpg" data-resource-id="img_20_stories_jpg">
+<meta name="ext-resource-dependency" content="img_small/21_support.jpg" data-resource-id="img_21_support_jpg">
+<meta name="ext-resource-dependency" content="img_small/22_friends.jpg" data-resource-id="img_22_friends_jpg">
+<meta name="ext-resource-dependency" content="img_small/22_gifts.jpg" data-resource-id="img_22_gifts_jpg">
+<meta name="ext-resource-dependency" content="img_small/23_corporate.jpg" data-resource-id="img_23_corporate_jpg">
+<meta name="ext-resource-dependency" content="img_small/23_donate.jpg" data-resource-id="img_23_donate_jpg">
+<meta name="ext-resource-dependency" content="img_small/24_anbi.jpg" data-resource-id="img_24_anbi_jpg">
+<meta name="ext-resource-dependency" content="img_small/25_corp_partner.jpg" data-resource-id="img_25_corp_partner_jpg">
+<meta name="ext-resource-dependency" content="img_small/26_quarterly.jpg" data-resource-id="img_26_quarterly_jpg">
+<meta name="ext-resource-dependency" content="img_small/29_research.jpg" data-resource-id="img_29_research_jpg">
+<meta name="ext-resource-dependency" content="img_small/30_our_research.jpg" data-resource-id="img_30_our_research_jpg">
+<meta name="ext-resource-dependency" content="img_small/31_conduct_research.jpg" data-resource-id="img_31_conduct_research_jpg">
+<meta name="ext-resource-dependency" content="img_small/32_catalogues.jpg" data-resource-id="img_32_catalogues_jpg">
+<meta name="ext-resource-dependency" content="img_small/33_fellowship.jpg" data-resource-id="img_33_fellowship_jpg">
+<meta name="ext-resource-dependency" content="img_small/34_studies.jpg" data-resource-id="img_34_studies_jpg">
+<meta name="ext-resource-dependency" content="img_small/35_image_req.jpg" data-resource-id="img_35_image_req_jpg">
+<meta name="ext-resource-dependency" content="img_small/36_faq_research.jpg" data-resource-id="img_36_faq_research_jpg">
+<meta name="ext-resource-dependency" content="img_small/37_login.jpg" data-resource-id="img_37_login_jpg">
+<meta name="ext-resource-dependency" content="img_small/38_newsletter.jpg" data-resource-id="img_38_newsletter_jpg">
+<meta name="ext-resource-dependency" content="img_small/39_about.jpg" data-resource-id="img_39_about_jpg">
+<meta name="ext-resource-dependency" content="img_small/39a_who_we_are.jpg" data-resource-id="img_39a_who_we_are_jpg">
+<meta name="ext-resource-dependency" content="img_small/39b_what_we_do.jpg" data-resource-id="img_39b_what_we_do_jpg">
+<meta name="ext-resource-dependency" content="img_small/40_press.jpg" data-resource-id="img_40_press_jpg">
+<meta name="ext-resource-dependency" content="img_small/41_careers.jpg" data-resource-id="img_41_careers_jpg">
+<meta name="ext-resource-dependency" content="img_small/42_contact.jpg" data-resource-id="img_42_contact_jpg">
+<meta name="ext-resource-dependency" content="img_small/43_terms.jpg" data-resource-id="img_43_terms_jpg">
+<meta name="ext-resource-dependency" content="img_small/44_privacy.jpg" data-resource-id="img_44_privacy_jpg">
+<meta name="ext-resource-dependency" content="img_small/45_cookies.jpg" data-resource-id="img_45_cookies_jpg">
+<meta name="ext-resource-dependency" content="img_small/46_ocw.jpg" data-resource-id="img_46_ocw_jpg">
+<meta name="ext-resource-dependency" content="img_small/C11_artists.jpg" data-resource-id="img_C11_artists_jpg">
+<meta name="ext-resource-dependency" content="img_small/C1_search.jpg" data-resource-id="img_C1_search_jpg">
+<meta name="ext-resource-dependency" content="img_small/C2_masterpieces.jpg" data-resource-id="img_C2_masterpieces_jpg">
+<meta name="ext-resource-dependency" content="img_small/C3_rijksstudio.jpg" data-resource-id="img_C3_rijksstudio_jpg">
+<meta name="ext-resource-dependency" content="img_small/C4_art_explorer.jpg" data-resource-id="img_C4_art_explorer_jpg">
+<meta name="ext-resource-dependency" content="img_small/C5_what_do_you_love.jpg" data-resource-id="img_C5_what_do_you_love_jpg">
+<meta name="ext-resource-dependency" content="img_small/C6_overview.jpg" data-resource-id="img_C6_overview_jpg">
+<meta name="ext-resource-dependency" content="img_small/C7_timeline.jpg" data-resource-id="img_C7_timeline_jpg">
+<meta name="ext-resource-dependency" content="img_small/C8_themes.jpg" data-resource-id="img_C8_themes_jpg">
+<meta name="ext-resource-dependency" content="img_small/C9_nightwatch_artwork.jpg" data-resource-id="img_C9_nightwatch_artwork_jpg">
+<meta name="ext-resource-dependency" content="img_small/S1_intl_circle.jpg" data-resource-id="img_S1_intl_circle_jpg">
+<meta name="ext-resource-dependency" content="img_small/S2_funds.jpg" data-resource-id="img_S2_funds_jpg">
+<meta name="ext-resource-dependency" content="img_small/S3_projects.jpg" data-resource-id="img_S3_projects_jpg">
+<meta name="ext-resource-dependency" content="img_small/S4_exhibitions.jpg" data-resource-id="img_S4_exhibitions_jpg">
+<meta name="ext-resource-dependency" content="img_small/S5_acquisitions.jpg" data-resource-id="img_S5_acquisitions_jpg">
+<meta name="ext-resource-dependency" content="img_small/S6_diversity.jpg" data-resource-id="img_S6_diversity_jpg">
+<meta name="ext-resource-dependency" content="img_small/S7_music.jpg" data-resource-id="img_S7_music_jpg">
+
+<script>
+  window.__thumbLookup = {
+  "img_small/01_home.jpg": "img_01_home_jpg",
+  "img_small/02_visit.jpg": "img_02_visit_jpg",
+  "img_small/03_tickets.jpg": "img_03_tickets_jpg",
+  "img_small/04_practical.jpg": "img_04_practical_jpg",
+  "img_small/05_families.jpg": "img_05_families_jpg",
+  "img_small/06_groups.jpg": "img_06_groups_jpg",
+  "img_small/07_accessibility.jpg": "img_07_accessibility_jpg",
+  "img_small/08_accessibility_statement.jpg": "img_08_accessibility_statement_jpg",
+  "img_small/09_app.jpg": "img_09_app_jpg",
+  "img_small/10_faq_visit.jpg": "img_10_faq_visit_jpg",
+  "img_small/11_education.jpg": "img_11_education_jpg",
+  "img_small/11a_intl_schools.jpg": "img_11a_intl_schools_jpg",
+  "img_small/11b_university_ed.jpg": "img_11b_university_ed_jpg",
+  "img_small/11c_summer_institute.jpg": "img_11c_summer_institute_jpg",
+  "img_small/11d_artist_residence.jpg": "img_11d_artist_residence_jpg",
+  "img_small/12_whatson.jpg": "img_12_whatson_jpg",
+  "img_small/13_nightwatch.jpg": "img_13_nightwatch_jpg",
+  "img_small/14_metamorphoses.jpg": "img_14_metamorphoses_jpg",
+  "img_small/15_fake.jpg": "img_15_fake_jpg",
+  "img_small/16_womensmonth.jpg": "img_16_womensmonth_jpg",
+  "img_small/17_guidedtours.jpg": "img_17_guidedtours_jpg",
+  "img_small/18_past_exhib.jpg": "img_18_past_exhib_jpg",
+  "img_small/19_collection.jpg": "img_19_collection_jpg",
+  "img_small/20_stories.jpg": "img_20_stories_jpg",
+  "img_small/21_support.jpg": "img_21_support_jpg",
+  "img_small/22_friends.jpg": "img_22_friends_jpg",
+  "img_small/22_gifts.jpg": "img_22_gifts_jpg",
+  "img_small/23_corporate.jpg": "img_23_corporate_jpg",
+  "img_small/23_donate.jpg": "img_23_donate_jpg",
+  "img_small/24_anbi.jpg": "img_24_anbi_jpg",
+  "img_small/25_corp_partner.jpg": "img_25_corp_partner_jpg",
+  "img_small/26_quarterly.jpg": "img_26_quarterly_jpg",
+  "img_small/29_research.jpg": "img_29_research_jpg",
+  "img_small/30_our_research.jpg": "img_30_our_research_jpg",
+  "img_small/31_conduct_research.jpg": "img_31_conduct_research_jpg",
+  "img_small/32_catalogues.jpg": "img_32_catalogues_jpg",
+  "img_small/33_fellowship.jpg": "img_33_fellowship_jpg",
+  "img_small/34_studies.jpg": "img_34_studies_jpg",
+  "img_small/35_image_req.jpg": "img_35_image_req_jpg",
+  "img_small/36_faq_research.jpg": "img_36_faq_research_jpg",
+  "img_small/37_login.jpg": "img_37_login_jpg",
+  "img_small/38_newsletter.jpg": "img_38_newsletter_jpg",
+  "img_small/39_about.jpg": "img_39_about_jpg",
+  "img_small/39a_who_we_are.jpg": "img_39a_who_we_are_jpg",
+  "img_small/39b_what_we_do.jpg": "img_39b_what_we_do_jpg",
+  "img_small/40_press.jpg": "img_40_press_jpg",
+  "img_small/41_careers.jpg": "img_41_careers_jpg",
+  "img_small/42_contact.jpg": "img_42_contact_jpg",
+  "img_small/43_terms.jpg": "img_43_terms_jpg",
+  "img_small/44_privacy.jpg": "img_44_privacy_jpg",
+  "img_small/45_cookies.jpg": "img_45_cookies_jpg",
+  "img_small/46_ocw.jpg": "img_46_ocw_jpg",
+  "img_small/C11_artists.jpg": "img_C11_artists_jpg",
+  "img_small/C1_search.jpg": "img_C1_search_jpg",
+  "img_small/C2_masterpieces.jpg": "img_C2_masterpieces_jpg",
+  "img_small/C3_rijksstudio.jpg": "img_C3_rijksstudio_jpg",
+  "img_small/C4_art_explorer.jpg": "img_C4_art_explorer_jpg",
+  "img_small/C5_what_do_you_love.jpg": "img_C5_what_do_you_love_jpg",
+  "img_small/C6_overview.jpg": "img_C6_overview_jpg",
+  "img_small/C7_timeline.jpg": "img_C7_timeline_jpg",
+  "img_small/C8_themes.jpg": "img_C8_themes_jpg",
+  "img_small/C9_nightwatch_artwork.jpg": "img_C9_nightwatch_artwork_jpg",
+  "img_small/S1_intl_circle.jpg": "img_S1_intl_circle_jpg",
+  "img_small/S2_funds.jpg": "img_S2_funds_jpg",
+  "img_small/S3_projects.jpg": "img_S3_projects_jpg",
+  "img_small/S4_exhibitions.jpg": "img_S4_exhibitions_jpg",
+  "img_small/S5_acquisitions.jpg": "img_S5_acquisitions_jpg",
+  "img_small/S6_diversity.jpg": "img_S6_diversity_jpg",
+  "img_small/S7_music.jpg": "img_S7_music_jpg"
+  };
+</script>
+
+</head>
+<body>
+
+<template id="__bundler_thumbnail" data-bg-color="#FAF8F3"></template>
+
+<!-- ============ HEADER ============ -->
+<div class="topbar">
+  <div class="brand">
+    <div class="eyebrow">Information Architecture · Case Study</div>
+    <h1>Rijksmuseum — Mappa dell'architettura del sito</h1>
+    <div class="sub">46 pagine · 8 sezioni · link diretti tra pagine</div>
+  </div>
+
+  <div class="tools">
+    <button id="btn-zoom-out" title="Zoom out">−</button>
+    <span class="zoom-level" id="zoom-level">24%</span>
+    <button id="btn-zoom-in" title="Zoom in">+</button>
+    <span class="divider"></span>
+    <button id="btn-fit" title="Adatta alla vista">Adatta</button>
+    <button id="btn-reset" title="Reset">Reset</button>
+    <span class="divider"></span>
+    <button id="btn-edit" title="Modifica posizione e zoom degli screenshot">✎ Modifica immagini</button>
+  </div>
+</div>
+
+<!-- ============ CANVAS ============ -->
+<div class="canvas-wrap" id="canvas-wrap">
+  <div class="canvas-bg" id="canvas-bg" style="width: 4300px; height: 3300px;"></div>
+  <div class="canvas" id="canvas" style="width: 4300px; height: 3300px; transform: translate(421.788px, 60px) scale(0.242424);">
+    <svg class="links-svg" id="links-svg" width="4300" height="3300">
+      <defs>
+        <!-- gradient cangiante per i link evidenziati -->
+        <lineargradient id="grad-shimmer" x1="0%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#FF3E8A">
+            <animate attributeName="stop-color" values="#FF3E8A; #FF7820; #F5C84C; #5ED6A8; #5BAEFF; #9D6BFF; #FF3E8A" dur="4s" repeatCount="indefinite"></animate>
+          </stop>
+          <stop offset="50%" stop-color="#FF7820">
+            <animate attributeName="stop-color" values="#FF7820; #F5C84C; #5ED6A8; #5BAEFF; #9D6BFF; #FF3E8A; #FF7820" dur="4s" repeatCount="indefinite"></animate>
+          </stop>
+          <stop offset="100%" stop-color="#F5C84C">
+            <animate attributeName="stop-color" values="#F5C84C; #5ED6A8; #5BAEFF; #9D6BFF; #FF3E8A; #FF7820; #F5C84C" dur="4s" repeatCount="indefinite"></animate>
+          </stop>
+          <animatetransform attributeName="gradientTransform" type="translate" from="0 0" to="200 0" dur="2s" repeatCount="indefinite"></animatetransform>
+        </lineargradient>
+
+        <!-- marker freccia primaria -->
+        <marker id="arrow-primary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#2a2620"></path>
+        </marker>
+        <!-- marker freccia secondaria -->
+        <marker id="arrow-secondary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#5a564e"></path>
+        </marker>
+        <!-- marker freccia footer -->
+        <marker id="arrow-footer" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#a7a299"></path>
+        </marker>
+        <!-- marker freccia highlight (cangiante) -->
+        <marker id="arrow-highlight" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#FF3E8A">
+            <animate attributeName="fill" values="#FF3E8A; #FF7820; #F5C84C; #5ED6A8; #5BAEFF; #9D6BFF; #FF3E8A" dur="4s" repeatCount="indefinite"></animate>
+          </path>
+        </marker>
+      </defs>
+      <g id="links-group"><path d="M 1703.1980076256802 1239.575 Q 1352.6803686294813 864.7938644234498 897.4356093171251 540.6" class="link-path primary" marker-end="url(#arrow-primary)" data-source="home" data-target="visit"></path><path d="M 2082.378506936533 1239.575 Q 2316.5640235470273 969.3760156980184 2530.009172865434 540.6" class="link-path primary" marker-end="url(#arrow-primary)" data-source="home" data-target="whatson"></path><path d="M 1577 1375.0894307898525 Q 1512.050608063404 1360.0262855272415 1319.5 1394.3929744012598" class="link-path primary" marker-end="url(#arrow-primary)" data-source="home" data-target="collection"></path><path d="M 2223 1480.1007983369502 Q 2651.066571864492 1519.9928898368967 3200.5 1453.9721994612482" class="link-path primary" marker-end="url(#arrow-primary)" data-source="home" data-target="stories"></path><path d="M 1581.3252149052207 1660.425 Q 1274.0494842402968 1863.3230598698328 887.2918267483503 2259.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="home" data-target="support"></path><path d="M 2055.599088980691 1660.425 Q 2291.923785287534 1980.0195718328625 2629.9075123564 2259.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="home" data-target="research"></path><path d="M 1577 1263.1363166112826 Q 1143.5537994691938 1012.3767079981833 443.5 763.8447657712813" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="families"></path><path d="M 1795.2422420644339 1239.575 Q 1567.3817120529209 781.8757042861306 1194.2393005287674 317.325" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="tickets"></path><path d="M 2223 1418.5669893923132 Q 2889.133125023502 1353.7416965595107 3745.5 1127.5959219544511" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="login"></path><path d="M 2223 1456.5426273614653 Q 2879.9137815134663 1469.8489495938295 3745.5 1345.0648622298288" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="newsletter"></path><path d="M 2223 1497.0777151558068 Q 2825.2770692537733 1584.8604653452905 3636.5 1563.2846818764704" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="about"></path><path d="M 2223 1533.6049254196325 Q 2861.2585948029778 1698.8110003946863 3745.5 1780.3622419283065" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="press"></path><path d="M 2223 1569.1687599100655 Q 2719.301113182073 1752.2758441202595 3475.5 1882.064372888287" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="careers"></path><path d="M 2223 1413.5319980674622 Q 2756.31634032896 1353.3184335790083 3475.5 1132.1382802708247" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="contact"></path><path d="M 1577 1619.274526477189 Q 1027.234599262112 1907.3899378810531 363.5 2407.032360188069" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="donate"></path><path d="M 1997.4535728750107 1239.575 Q 2200.894663844041 800.2982212813471 2329.97516423816 194.05" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="metamorphoses"></path><path d="M 1577 1558.6883269234868 Q 1047.840795037184 1736.7484775846972 383.5 2102.084548864007" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="friends"></path><path d="M 2129.6097729964035 1239.575 Q 2534.3007331922954 868.6975143079842 2962.146602505151 297.325" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="home" data-target="nightwatch"></path><path d="M 2223 1563.6906739465562 Q 2929.043949466034 1812.2065019672427 3895.5 1999.7242654975462" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="home" data-target="terms"></path><path d="M 2223 1600.1165977739888 Q 2921.520373792641 1924.7590187943174 3895.5 2218.4855590128145" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="home" data-target="privacy"></path><path d="M 2222.5199159526264 1660.425 Q 2781.505037561446 2025.1294365217225 3635.5 2412.588197471728" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="home" data-target="cookies"></path><path d="M 2172.343908769919 1660.425 Q 2775.7913701359994 2126.675310614558 3635.5 2611.114994947943" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="home" data-target="ocw"></path><path d="M 3883.5 1548.3036211699164 Q 3939.5 1543 3976.0548672566374 1513.6" class="link-path primary" marker-end="url(#arrow-primary)" data-source="about" data-target="who-we-are"></path><path d="M 3883.5 1653.9295774647887 Q 3902 1668 3975.5 1672.9550561797753" class="link-path primary" marker-end="url(#arrow-primary)" data-source="about" data-target="what-we-do"></path><path d="M 561.8811764705882 259.4 Q 533 230 404.5 202.42489270386267" class="link-path primary" marker-end="url(#arrow-primary)" data-source="visit" data-target="practical"></path><path d="M 500.5 486.3382352941176 Q 462 503 381.5442396313364 625.95" class="link-path primary" marker-end="url(#arrow-primary)" data-source="visit" data-target="families"></path><path d="M 651.6153846153846 540.6 Q 615 647 658.5217391304348 816.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="visit" data-target="groups"></path><path d="M 651.6602023346381 540.6 Q 402.3628669702996 1265.7003737101309 274.8061850843504 2075.95" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="visit" data-target="friends"></path><path d="M 899.5 529.5828158864066 Q 1045.2887458916716 624.2781352708207 1288.5 669.7831947354517" class="link-path primary" marker-end="url(#arrow-primary)" data-source="visit" data-target="education"></path><path d="M 500.5 358.012316370257 Q 367.57686986873847 330.03670566836945 144.5 391.3008911116878" class="link-path primary" marker-end="url(#arrow-primary)" data-source="visit" data-target="accessibility"></path><path d="M 899.5 499.3412719845279 Q 2242.7030631017174 1168.1909001651732 3745.5 1749.5724663930896" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="visit" data-target="press"></path><path d="M 899.5 416.8 Q 1650 480 2400.5 416.8" class="link-path primary" marker-end="url(#arrow-primary)" data-source="visit" data-target="whatson"></path><path d="M 899.5 365.30434782608694 Q 930 360 975.3421875 317.325" class="link-path primary" marker-end="url(#arrow-primary)" data-source="visit" data-target="tickets"></path><path d="M 899.5 394.87974382365763 Q 1882.4567569288263 369.65172173973644 2888.5 206.23350633283593" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="visit" data-target="nightwatch"></path><path d="M 899.5 442.56 Q 1075 480 1345.5 422.29333333333335" class="link-path primary" marker-end="url(#arrow-primary)" data-source="visit" data-target="faq-visit"></path><path d="M 822.3299435028248 540.6 Q 854 577 975.5 610.8694690265487" class="link-path primary" marker-end="url(#arrow-primary)" data-source="visit" data-target="app"></path><path d="M 14.919999999999998 503.6 Q 1 550 14.919999999999998 596.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="accessibility" data-target="acc-statement"></path><path d="M 1414.8025 817.325 Q 1409.5 835 1424.92 886.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="education" data-target="intl-schools"></path><path d="M 1611.5 748.45 Q 1640 757 1706.5 737.05" class="link-path primary" marker-end="url(#arrow-primary)" data-source="education" data-target="university-ed"></path><path d="M 1801.785 794.05 Q 1791 830 1804.92 876.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="university-ed" data-target="summer-inst"></path><path d="M 1801.785 794.05 Q 1756.5 945 1804.92 1106.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="university-ed" data-target="artist-res"></path><path d="M 1866.665070261717 794.05 Q 2252.637948560296 1784.1135385358605 2773.3102671414686 2716.4" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="university-ed" data-target="fellowship"></path><path d="M 2540.0106666666666 259.4 Q 2520 212.5 2473.5 181.72794117647055" class="link-path primary" marker-end="url(#arrow-primary)" data-source="whatson" data-target="metamorphoses"></path><path d="M 2799.5 438.9268292682927 Q 3010 480 3315.5 420.390243902439" class="link-path primary" marker-end="url(#arrow-primary)" data-source="whatson" data-target="fake"></path><path d="M 2799.5 512.0237216298726 Q 2984.1484917366793 615.7079884854396 3315.5 664.5853115662214" class="link-path primary" marker-end="url(#arrow-primary)" data-source="whatson" data-target="womensmonth"></path><path d="M 2710.177777777778 540.6 Q 2734 571 2835.5 604.997572815534" class="link-path primary" marker-end="url(#arrow-primary)" data-source="whatson" data-target="guidedtours"></path><path d="M 2799.5 367.13662790697674 Q 2858 357.5 2923.090704225352 297.325" class="link-path primary" marker-end="url(#arrow-primary)" data-source="whatson" data-target="nightwatch"></path><path d="M 2400.5 410.58323161872977 Q 1827.5229941221592 440.9789627736745 1184.5 612.1778479676409" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="whatson" data-target="app"></path><path d="M 2557.82 540.6 Q 2543 590 2574.92 696.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="whatson" data-target="past-exhib"></path><path d="M 2661.8811764705883 2259.4 Q 2633 2230 2523.5 2206.502145922747" class="link-path primary" marker-end="url(#arrow-primary)" data-source="research" data-target="our-research"></path><path d="M 2600.5 2395.392609699769 Q 2583.5 2395 2523.5 2432.6021798365123" class="link-path primary" marker-end="url(#arrow-primary)" data-source="research" data-target="conduct-research"></path><path d="M 2600.5 2530.881035763438 Q 2559.259471810776 2557.9366901235226 2478.044592537888 2736.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="research" data-target="catalogues"></path><path d="M 2765.369458128079 2540.6 Q 2750 2603 2790.2944162436547 2716.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="research" data-target="fellowship"></path><path d="M 2869.808174939936 2540.6 Q 2926.2720448330874 2654.323358529394 3065.5 2737.5401602034" class="link-path primary" marker-end="url(#arrow-primary)" data-source="research" data-target="studies"></path><path d="M 2999.5 2374.573529411765 Q 3055 2367.5 3152.6746268656716 2283.6" class="link-path primary" marker-end="url(#arrow-primary)" data-source="research" data-target="image-req"></path><path d="M 2999.5 2495.3321678321677 Q 3014.5 2502.5 3145.5 2484.4214437367305" class="link-path primary" marker-end="url(#arrow-primary)" data-source="research" data-target="faq-research"></path><path d="M 591.7041411866301 2259.4 Q 538.9925709611097 2212.581044474158 383.5 2188.8491004417874" class="link-path primary" marker-end="url(#arrow-primary)" data-source="support" data-target="friends"></path><path d="M 550.5 2380.4194444444443 Q 480 2373.5 363.5 2434.905208333333" class="link-path primary" marker-end="url(#arrow-primary)" data-source="support" data-target="donate"></path><path d="M 617.6705882352941 2540.6 Q 598 2561.5 576.3565217391305 2685.95" class="link-path primary" marker-end="url(#arrow-primary)" data-source="support" data-target="corp-partner"></path><path d="M 922.7551569506727 2259.4 Q 887 2288.5 910.4175074183976 2214.05" class="link-path primary" marker-end="url(#arrow-primary)" data-source="support" data-target="intl-circle"></path><path d="M 949.5 2459.85 Q 925 2452.5 976.5 2437.05" class="link-path primary" marker-end="url(#arrow-primary)" data-source="support" data-target="funds-fdn"></path><path d="M 118.59 2594.05 Q 98 2610 68.52235294117648 2696.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="donate" data-target="anbi"></path><path d="M 1155.8132786885246 2494.05 Q 1190.5 2552.5 1226.5 2569.9921630094045" class="link-path primary" marker-end="url(#arrow-primary)" data-source="funds-fdn" data-target="projects"></path><path d="M 1226.5 2705.8008982035926 Q 1183 2732.5 1139.0918309859155 2826.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="projects" data-target="proj-exhib"></path><path d="M 1332.426643598616 2724.05 Q 1323 2774.5 1344.8324723247233 2826.4" class="link-path primary" marker-end="url(#arrow-primary)" data-source="projects" data-target="proj-acq"></path><path d="M 1473.5 2702.2434640522874 Q 1503 2719.5 1575.5 2715.608757062147" class="link-path primary" marker-end="url(#arrow-primary)" data-source="projects" data-target="proj-diversity"></path><path d="M 1473.5 2595.118320610687 Q 1546.5 2574.5 1607.7631067961165 2503.6" class="link-path primary" marker-end="url(#arrow-primary)" data-source="projects" data-target="proj-music"></path><path d="M 988.9506601812018 1289.4 Q 912.155173508934 1207.0077846630097 743.5 1156.7799798881642" class="link-path primary" marker-end="url(#arrow-primary)" data-source="collection" data-target="search"></path><path d="M 920.5 1343.0809128630706 Q 879 1325 743.5 1348.542471042471" class="link-path primary" marker-end="url(#arrow-primary)" data-source="collection" data-target="masterpieces"></path><path d="M 920.5 1447.0893854748604 Q 851.5 1453 759.1112275449102 1525.95" class="link-path primary" marker-end="url(#arrow-primary)" data-source="collection" data-target="rijksstudio"></path><path d="M 920.5 1535.3610297811076 Q 817.149768408638 1589.9429186461796 686.2077017627944 1775.95" class="link-path primary" marker-end="url(#arrow-primary)" data-source="collection" data-target="art-explorer"></path><path d="M 920.5 1313.010051806794 Q 727.6978295945904 1199.9478165824003 403.5 1142.0540612333712" class="link-path primary" marker-end="url(#arrow-primary)" data-source="collection" data-target="overview"></path><path d="M 920.5 1377.1290649970872 Q 705.6997639990328 1320.2033040135411 384.5 1357.7759980844228" class="link-path primary" marker-end="url(#arrow-primary)" data-source="collection" data-target="themes"></path><path d="M 971.5118896919851 1570.6 Q 805.2200125778238 1728.057980128858 664.4452018404953 2025.95" class="link-path primary" marker-end="url(#arrow-primary)" data-source="collection" data-target="artists"></path><path d="M 920.5 1437.73620891073 Q 682.3506202172907 1446.9711630659172 403.5 1566.889453408028" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="collection" data-target="nightwatch-artwork"></path><path d="M 496.5 1832.95 Q 450 1819 384.5 1838.65" class="link-path primary" marker-end="url(#arrow-primary)" data-source="art-explorer" data-target="art-explorer-q"></path><path d="M 156.5 1082.95 Q 110 1069 44.5 1088.65" class="link-path primary" marker-end="url(#arrow-primary)" data-source="overview" data-target="timeline"></path><path d="M 496.5 1414.0433734939759 Q 412.5 1444 350.8046875 1525.95" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="masterpieces" data-target="nightwatch-artwork"></path><path d="M 586.890819656719 2025.95 Q 516.1541201655623 1825.0151982874177 388.33487071740785 1714.05" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="artists" data-target="nightwatch-artwork"></path><path d="M -78.5 1449 Q 440 1510 920.5 1453.4705882352941" class="link-path primary" marker-end="url(#arrow-primary)" data-source="data-layer" data-target="collection"></path><path d="M -78.5 1401.8284112473407 Q 217.12854363252612 1350.2598307224919 496.5 1190.5860111079432" class="link-path primary" marker-end="url(#arrow-primary)" data-source="data-layer" data-target="search"></path><path d="M -78.5 1496.1082786078446 Q 183.11632131912924 1603.198090732454 516.5 1615.4582842605955" class="link-path primary" marker-end="url(#arrow-primary)" data-source="data-layer" data-target="rijksstudio"></path><path d="M -81.4440031509317 1547.325 Q 153.561935654881 1721.219853038187 496.5 1830.607099732348" class="link-path primary" marker-end="url(#arrow-primary)" data-source="data-layer" data-target="art-explorer"></path><path d="M -130.58386360353182 1547.325 Q 139.93596269896597 1837.398655186796 496.5 2047.298728143335" class="link-path primary" marker-end="url(#arrow-primary)" data-source="data-layer" data-target="artists"></path><path d="M -79.64323796050996 1547.325 Q -7.45543623388312 1600.1411939032591 156.5 1611.468025148246" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="data-layer" data-target="nightwatch-artwork"></path><path d="M -78.5 1448.4670886502536 Q 195.5678610279231 1479.8060080668977 496.5 1401.9510252666187" class="link-path secondary" marker-end="url(#arrow-secondary)" data-source="data-layer" data-target="masterpieces"></path><path d="M 899.5 486.9938645152806 Q 2201.642400698132 1054.8053912618248 3636.5 1519.9632753052858" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="visit" data-target="about"></path><path d="M 899.5 516.7319081067976 Q 2103.0452464930427 1220.9531267333584 3475.5 1851.9549274695978" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="visit" data-target="careers"></path><path d="M 899.5 460.0472478754099 Q 2121.1056491568397 827.736757754717 3475.5 1080.4978963705023" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="visit" data-target="contact"></path><path d="M 658.0537892952301 540.6 Q 391.8528571279236 1432.8820544184975 253.3834889311122 2405.95" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="visit" data-target="donate"></path><path d="M 899.5 469.61992519399155 Q 2252.3475831903406 941.7259279036849 3745.5 1304.6035870461185" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="visit" data-target="newsletter"></path><path d="M 899.5 508.9470166172332 Q 2314.7461447488467 1281.8134088449417 3895.5 1974.2261846573806" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="visit" data-target="terms"></path><path d="M 899.5 523.19921684573 Q 2310.879538853059 1394.7824442080575 3895.5 2197.0906684064594" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="visit" data-target="privacy"></path><path d="M 889.1964270093451 540.6 Q 2175.122514898232 1496.2269683055217 3635.5 2395.6407880035904" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="visit" data-target="cookies"></path><path d="M 872.6144643756484 540.6 Q 2172.135056328466 1599.101069938971 3635.5 2598.6233558297977" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="visit" data-target="ocw"></path><path d="M 2715.61121546593 540.6 Q 3123.431457505076 1036.5685424949238 3645.6215640782975 1465.95" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="whatson" data-target="about"></path><path d="M 2706.2286218686418 540.6 Q 3165.515193806181 1148.4935307498372 3760.7991383708268 1706.4" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="whatson" data-target="press"></path><path d="M 2674.9317965098003 540.6 Q 3023.026703998729 1193.7558867208304 3514.069584906684 1816.4" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="whatson" data-target="careers"></path><path d="M 2750.220263632431 540.6 Q 3043.500944502472 815.0986776965387 3475.5 1044.5065412965132" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="whatson" data-target="contact"></path><path d="M 2424.9050505509354 540.6 Q 1366.8194634691408 1390.2352065653201 335.49534384784073 2405.95" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="whatson" data-target="donate"></path><path d="M 2753.369802781028 540.6 Q 3177.2468239431673 929.1843764204742 3745.5 1267.7405649579243" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="whatson" data-target="newsletter"></path><path d="M 2704.266119516767 540.6 Q 3239.470965070861 1262.3090425313546 3916.0868600933422 1936.4" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="whatson" data-target="terms"></path><path d="M 2691.9069481499755 540.6 Q 3236.2074891518146 1373.2754136148428 3927.1686286680037 2166.4" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="whatson" data-target="privacy"></path><path d="M 2665.7790881301617 540.6 Q 3100.0034019340974 1468.7359814539461 3686.024757685862 2376.4" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="whatson" data-target="cookies"></path><path d="M 2659.860085903002 540.6 Q 3098.5089233465505 1570.9030076585605 3691.2066229077914 2586.4" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="whatson" data-target="ocw"></path><path d="M 1319.5 1451.9656148287959 Q 2436.0653735455567 1574.903183382541 3636.5 1561.3902069716787" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="collection" data-target="about"></path><path d="M 1319.5 1468.1922839660574 Q 2474.5410935545056 1689.313373878334 3745.5 1782.350369480027" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="collection" data-target="press"></path><path d="M 1319.5 1481.4893968325507 Q 2334.986999124195 1743.578685435066 3475.5 1886.8707978466593" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="collection" data-target="careers"></path><path d="M 1319.5 1416.2174025460315 Q 2360.6364314605394 1344.2897617967492 3475.5 1120.9357412066508" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="collection" data-target="contact"></path><path d="M 974.2881022454915 1570.6 Q 618.2122567792204 1914.1839121174896 300.7201875910579 2405.95" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="collection" data-target="donate"></path><path d="M 1319.5 1434.3674093989498 Q 2487.928438958458 1459.9463835659037 3745.5 1339.9696649361456" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="collection" data-target="newsletter"></path><path d="M 1319.5 1482.3108714372395 Q 2543.94455657656 1803.3723339991652 3895.5 2004.4527959430843" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="collection" data-target="terms"></path><path d="M 1319.5 1498.5039315706147 Q 2538.092889552561 1916.9420464495433 3895.5 2226.1923614042958" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="collection" data-target="privacy"></path><path d="M 1319.5 1521.81942675833 Q 2400.7302268637663 2019.4532093368273 3635.5 2425.6251932599853" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="collection" data-target="cookies"></path><path d="M 1319.5 1538.2602340929755 Q 2395.77682220197 2122.3102627668054 3635.5 2627.4225630935607" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="collection" data-target="ocw"></path><path d="M 3589.6327731092438 1570.6 Q 3560.5 1549 3636.5 1553.1904761904761" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="stories" data-target="about"></path><path d="M 3501.49082512429 1570.6 Q 3575.024396195646 1672.4695047554424 3745.5 1745.3344493724799" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="stories" data-target="press"></path><path d="M 3410.4645038167937 1570.6 Q 3419.5 1692 3515.4913461538463 1816.4" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="stories" data-target="careers"></path><path d="M 3542.128260869565 1289.4 Q 3539.5 1292 3562.365625 1183.6" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="stories" data-target="contact"></path><path d="M 3200.5 1487.057994433747 Q 1794.3423765189857 1889.2260839252285 363.5 2451.471065979579" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="stories" data-target="donate"></path><path d="M 3599.5 1444.546875 Q 3640 1447.5 3745.5 1388.470238095238" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="stories" data-target="newsletter"></path><path d="M 3497.4133430395354 1570.6 Q 3643.9088038549007 1782.0418943848467 3895.5 1950.1678269331576" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="stories" data-target="terms"></path><path d="M 3472.396258010044 1570.6 Q 3635.4375739473257 1887.2407995507374 3915.9844360108345 2166.4" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="stories" data-target="privacy"></path><path d="M 3424.4796377800985 1570.6 Q 3494.031903267181 1970.0768474652025 3698.028248347779 2376.4" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="stories" data-target="cookies"></path><path d="M 3420.3607411300763 1570.6 Q 3492.847682868803 2071.1546676004896 3705.4970447387846 2586.4" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="stories" data-target="ocw"></path><path d="M 949.5 2355.1803396966543 Q 2276.5039174251156 2057.0557041066645 3636.5 1601.379535934214" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="support" data-target="about"></path><path d="M 949.5 2371.1342322309424 Q 2315.4457451152566 2173.494770257862 3745.5 1816.1152079598232" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="support" data-target="press"></path><path d="M 949.5 2376.0949215369433 Q 2178.918706834049 2228.779880680716 3475.5 1924.522129942581" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="support" data-target="careers"></path><path d="M 949.5 2320.4829833540102 Q 2198.394281095382 1822.6967811537938 3475.5 1154.6623487419026" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="support" data-target="contact"></path><path d="M 949.5 2341.85280481033 Q 2326.1018071347207 1940.6220580538632 3745.5 1371.8728792811619" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="support" data-target="newsletter"></path><path d="M 949.5 2386.5060783942936 Q 2384.290556105475 2289.458703533666 3895.5 2037.427907366435" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="support" data-target="terms"></path><path d="M 949.5 2400.6020355424807 Q 2378.688381328672 2404.914928787895 3895.5 2259.984884997988" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="support" data-target="privacy"></path><path d="M 949.5 2414.692554880224 Q 2243.3949719533007 2509.9838976605247 3635.5 2463.49011075577" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="support" data-target="cookies"></path><path d="M 949.5 2428.785908496729 Q 2237.805194373439 2614.6758104571018 3635.5 2666.1513794445445" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="support" data-target="ocw"></path><path d="M 2999.5 2265.249631524518 Q 3332.6803686294816 2040.2061355765502 3676.308001183399 1654.05" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="research" data-target="about"></path><path d="M 2999.5 2316.757936743728 Q 3365.1867335342117 2164.173885591676 3745.5 1870.6520236737156" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="research" data-target="press"></path><path d="M 2999.5 2315.879834116009 Q 3233.1732891776346 2217.35033111711 3488.6349999299355 1983.6" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="research" data-target="careers"></path><path d="M 2905.9047442132346 2259.4 Q 3258.5994340570037 1791.1596604342021 3541.124630311968 1183.6" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="research" data-target="contact"></path><path d="M 2600.5 2395.3450766768133 Q 1516.8773814607716 2370.0609653957563 363.5 2487.4322538666434" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="research" data-target="donate"></path><path d="M 2970.8742102786955 2259.4 Q 3382.0996671216685 1921.0323836240673 3783.8167096889415 1413.6" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="research" data-target="newsletter"></path><path d="M 2999.5 2363.6471849677337 Q 3424.151336375552 2286.2673780280593 3895.5 2068.3198846530254" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="research" data-target="terms"></path><path d="M 2999.5 2401.4333862298395 Q 3409.9227787671366 2404.3822301370933 3895.5 2277.340392865224" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="research" data-target="privacy"></path><path d="M 2999.5 2447.133574122913 Q 3264.903987661973 2509.83752662909 3635.5 2470.9620400876665" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="research" data-target="cookies"></path><path d="M 2999.5 2494.375753257859 Q 3247.914295152768 2611.8909724311047 3635.5 2657.659886639392" class="link-path footer-link" marker-end="url(#arrow-footer)" data-source="research" data-target="ocw"></path></g>
+    </svg>
+    <div id="sections-group"><div class="section-halo" style="left: -100px; top: 50px; width: 2110px; height: 1260px; background: rgb(59, 139, 212); opacity: 0.07;"></div><div class="section-label draggable-label" data-key="visit" title="Trascina per spostare · doppio click per reset" style="left: -100px; top: -14px; background: rgb(59, 139, 212);">VISIT &amp; TICKETS</div><div class="section-halo" style="left: 2190px; top: -30px; width: 1370px; height: 930px; background: rgb(186, 117, 23); opacity: 0.07;"></div><div class="section-label draggable-label" data-key="whatson" title="Trascina per spostare · doppio click per reset" style="left: 2190px; top: -94px; background: rgb(186, 117, 23);">WHAT'S ON</div><div class="section-halo" style="left: -440px; top: 990px; width: 1800px; height: 1270px; background: rgb(29, 158, 117); opacity: 0.07;"></div><div class="section-label draggable-label" data-key="collection" title="Trascina per spostare · doppio click per reset" style="left: -440px; top: 926px; background: rgb(29, 158, 117);">COLLECTION</div><div class="section-halo" style="left: 3160px; top: 1255px; width: 480px; height: 355px; background: rgb(216, 90, 48); opacity: 0.07;"></div><div class="section-label draggable-label" data-key="stories" title="Trascina per spostare · doppio click per reset" style="left: 3460px; top: 1191px; background: rgb(216, 90, 48);">STORIES</div><div class="section-halo" style="left: -100px; top: 1990px; width: 1920px; height: 1040px; background: rgb(212, 83, 126); opacity: 0.07;"></div><div class="section-label draggable-label" data-key="support" title="Trascina per spostare · doppio click per reset" style="left: -100px; top: 3050px; background: rgb(212, 83, 126);">SUPPORT</div><div class="section-halo" style="left: 2240px; top: 2050px; width: 1150px; height: 890px; background: rgb(127, 119, 221); opacity: 0.07;"></div><div class="section-label draggable-label" data-key="research" title="Trascina per spostare · doppio click per reset" style="left: 2240px; top: 2960px; background: rgb(127, 119, 221);">RESEARCH</div><div class="section-halo" style="left: 3440px; top: 980px; width: 780px; height: 1810px; background: rgb(141, 136, 127); opacity: 0.07;"></div><div class="section-label draggable-label" data-key="footer" title="Trascina per spostare · doppio click per reset" style="left: 3440px; top: 916px; background: rgb(141, 136, 127);">FOOTER / LEGAL</div></div>
+    <div id="nodes-group"><div class="node size-xxl" data-id="home" style="left: 1560px; top: 1228.5px;">
+    <div class="node-card" style="border-color:#4a4640; box-shadow: 0 8px 24px -12px #4a464080, 0 2px 8px -4px #4a464060;">
+      <span class="node-section-tag" style="background:#4a4640;">Home</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/01_home.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/01_home.jpg" alt="Home" data-node-id="home" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Home</div>
+        <div class="node-url">/en</div>
+      </div>
+    </div></div><div class="node size-xl" data-id="visit" style="left: 490px; top: 252px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/02_visit.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/02_visit.jpg" alt="Visit" data-node-id="visit" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Visit</div>
+        <div class="node-url">/en/visit</div>
+      </div>
+    </div></div><div class="node size-l" data-id="tickets" style="left: 930px; top: 76.5px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/03_tickets.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/03_tickets.jpg" alt="Tickets" data-node-id="tickets" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Tickets</div>
+        <div class="node-url">/en/tickets</div>
+      </div>
+    </div></div><div class="node size-s" data-id="practical" style="left: 190px; top: 92px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/04_practical.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/04_practical.jpg" alt="Practical Info" data-node-id="practical" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Practical Info</div>
+        <div class="node-url">/en/visit/practical-info</div>
+      </div>
+    </div></div><div class="node size-m" data-id="families" style="left: 190px; top: 621px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/05_families.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/05_families.jpg" alt="Families &amp; Children" data-node-id="families" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Families &amp; Children</div>
+        <div class="node-url">/en/families-and-children</div>
+      </div>
+    </div></div><div class="node size-s" data-id="groups" style="left: 570px; top: 812px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/06_groups.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/06_groups.jpg" alt="Groups" data-node-id="groups" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Groups</div>
+        <div class="node-url">/en/groups</div>
+      </div>
+    </div></div><div class="node size-s" data-id="accessibility" style="left: -70px; top: 332px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/07_accessibility.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/07_accessibility.jpg" alt="Accessibility" data-node-id="accessibility" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Accessibility</div>
+        <div class="node-url">/en/visit/accessibility</div>
+      </div>
+    </div></div><div class="node size-s" data-id="acc-statement" style="left: -70px; top: 592px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/08_accessibility_statement.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/08_accessibility_statement.jpg" alt="Accessibility Statement" data-node-id="acc-statement" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Accessibility Statement</div>
+        <div class="node-url">/en/visit/accessibility/accessibility-statement</div>
+      </div>
+    </div></div><div class="node size-s" data-id="app" style="left: 970px; top: 552px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/09_app.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/09_app.jpg" alt="App" data-node-id="app" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">App</div>
+        <div class="node-url">/en/app</div>
+      </div>
+    </div></div><div class="node size-s" data-id="faq-visit" style="left: 1340px; top: 312px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/10_faq_visit.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/10_faq_visit.jpg" alt="FAQ (Visit)" data-node-id="faq-visit" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">FAQ (Visit)</div>
+        <div class="node-url">/en/visit/faq</div>
+      </div>
+    </div></div><div class="node size-l" data-id="education" style="left: 1280px; top: 576.5px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/11_education.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/11_education.jpg" alt="Education" data-node-id="education" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Education</div>
+        <div class="node-url">/en/education</div>
+      </div>
+    </div></div><div class="node size-s" data-id="intl-schools" style="left: 1340px; top: 882px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/11a_intl_schools.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/11a_intl_schools.jpg" alt="International Schools" data-node-id="intl-schools" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">International Schools</div>
+        <div class="node-url">/en/education/schools</div>
+      </div>
+    </div></div><div class="node size-m" data-id="university-ed" style="left: 1700px; top: 601px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/11b_university_ed.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/11b_university_ed.jpg" alt="University Education" data-node-id="university-ed" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">University Education</div>
+        <div class="node-url">/en/education/university-education</div>
+      </div>
+    </div></div><div class="node size-s" data-id="summer-inst" style="left: 1720px; top: 872px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/11c_summer_institute.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/11c_summer_institute.jpg" alt="Summer Institute" data-node-id="summer-inst" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Summer Institute</div>
+        <div class="node-url">/en/education/university-education/summer-institute</div>
+      </div>
+    </div></div><div class="node size-s" data-id="artist-res" style="left: 1720px; top: 1102px;">
+    <div class="node-card" style="border-color:#3B8BD4; box-shadow: 0 8px 24px -12px #3B8BD480, 0 2px 8px -4px #3B8BD460;">
+      <span class="node-section-tag" style="background:#3B8BD4;">Visit &amp; Tickets</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/11d_artist_residence.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/11d_artist_residence.jpg" alt="Artist in Residence" data-node-id="artist-res" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Artist in Residence</div>
+        <div class="node-url">/en/education/university-education/artist-in-residence-programme</div>
+      </div>
+    </div></div><div class="node size-xl" data-id="whatson" style="left: 2390px; top: 252px;">
+    <div class="node-card" style="border-color:#BA7517; box-shadow: 0 8px 24px -12px #BA751780, 0 2px 8px -4px #BA751760;">
+      <span class="node-section-tag" style="background:#BA7517;">What's On</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/12_whatson.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/12_whatson.jpg" alt="What&#39;s On" data-node-id="whatson" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">What's On</div>
+        <div class="node-url">/en/whats-on</div>
+      </div>
+    </div></div><div class="node size-l" data-id="nightwatch" style="left: 2880px; top: 56.5px;">
+    <div class="node-card" style="border-color:#BA7517; box-shadow: 0 8px 24px -12px #BA751780, 0 2px 8px -4px #BA751760;">
+      <span class="node-section-tag" style="background:#BA7517;">What's On</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/13_nightwatch.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/13_nightwatch.jpg" alt="Operation Night Watch" data-node-id="nightwatch" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Operation Night Watch</div>
+        <div class="node-url">/en/whats-on/exhibitions/operation-night-watch</div>
+      </div>
+    </div></div><div class="node size-m" data-id="metamorphoses" style="left: 2220px; top: 1px;">
+    <div class="node-card" style="border-color:#BA7517; box-shadow: 0 8px 24px -12px #BA751780, 0 2px 8px -4px #BA751760;">
+      <span class="node-section-tag" style="background:#BA7517;">What's On</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/14_metamorphoses.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/14_metamorphoses.jpg" alt="Metamorphoses" data-node-id="metamorphoses" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Metamorphoses</div>
+        <div class="node-url">/en/whats-on/exhibitions/metamorphoses</div>
+      </div>
+    </div></div><div class="node size-s" data-id="fake" style="left: 3310px; top: 312px;">
+    <div class="node-card" style="border-color:#BA7517; box-shadow: 0 8px 24px -12px #BA751780, 0 2px 8px -4px #BA751760;">
+      <span class="node-section-tag" style="background:#BA7517;">What's On</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/15_fake.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/15_fake.jpg" alt="FAKE!" data-node-id="fake" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">FAKE!</div>
+        <div class="node-url">/en/whats-on/exhibitions/fake</div>
+      </div>
+    </div></div><div class="node size-s" data-id="womensmonth" style="left: 3310px; top: 592px;">
+    <div class="node-card" style="border-color:#BA7517; box-shadow: 0 8px 24px -12px #BA751780, 0 2px 8px -4px #BA751760;">
+      <span class="node-section-tag" style="background:#BA7517;">What's On</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/16_womensmonth.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/16_womensmonth.jpg" alt="Women&#39;s Month" data-node-id="womensmonth" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Women's Month</div>
+        <div class="node-url">/en/whats-on/womensmonth</div>
+      </div>
+    </div></div><div class="node size-s" data-id="guidedtours" style="left: 2830px; top: 552px;">
+    <div class="node-card" style="border-color:#BA7517; box-shadow: 0 8px 24px -12px #BA751780, 0 2px 8px -4px #BA751760;">
+      <span class="node-section-tag" style="background:#BA7517;">What's On</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/17_guidedtours.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/17_guidedtours.jpg" alt="Guided Tours" data-node-id="guidedtours" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Guided Tours</div>
+        <div class="node-url">/en/whats-on/guided-tours/the-best-of-the-rijksmuseum</div>
+      </div>
+    </div></div><div class="node size-s" data-id="past-exhib" style="left: 2490px; top: 692px;">
+    <div class="node-card" style="border-color:#BA7517; box-shadow: 0 8px 24px -12px #BA751780, 0 2px 8px -4px #BA751760;">
+      <span class="node-section-tag" style="background:#BA7517;">What's On</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/18_past_exhib.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/18_past_exhib.jpg" alt="Past Exhibitions" data-node-id="past-exhib" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Past Exhibitions</div>
+        <div class="node-url">/en/whats-on/exhibitions/past</div>
+      </div>
+    </div></div><div class="node size-xl" data-id="collection" style="left: 910px; top: 1282px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/19_collection.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/19_collection.jpg" alt="Collection" data-node-id="collection" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Collection</div>
+        <div class="node-url">/en/collection</div>
+      </div>
+    </div></div><div class="node size-m" data-id="search" style="left: 490px; top: 1021px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/C1_search.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/C1_search.jpg" alt="Search Collection" data-node-id="search" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Search Collection</div>
+        <div class="node-url">/en/collection/search</div>
+      </div>
+    </div></div><div class="node size-m" data-id="masterpieces" style="left: 490px; top: 1271px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/C2_masterpieces.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/C2_masterpieces.jpg" alt="Masterpieces" data-node-id="masterpieces" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Masterpieces</div>
+        <div class="node-url">/en/masterpieces-up-close</div>
+      </div>
+    </div></div><div class="node size-m" data-id="rijksstudio" style="left: 510px; top: 1521px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/C3_rijksstudio.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/C3_rijksstudio.jpg" alt="Rijksstudio" data-node-id="rijksstudio" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Rijksstudio</div>
+        <div class="node-url">/en/rijksstudio</div>
+      </div>
+    </div></div><div class="node size-m" data-id="art-explorer" style="left: 490px; top: 1771px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/C4_art_explorer.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/C4_art_explorer.jpg" alt="Art Explorer" data-node-id="art-explorer" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Art Explorer</div>
+        <div class="node-url">/en/collection/art-explorer</div>
+      </div>
+    </div></div><div class="node size-s" data-id="art-explorer-q" style="left: 170px; top: 1782px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/C5_what_do_you_love.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/C5_what_do_you_love.jpg" alt="What Do You Love?" data-node-id="art-explorer-q" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">What Do You Love?</div>
+        <div class="node-url">/en/collection/art-explorer/what-do-you-love</div>
+      </div>
+    </div></div><div class="node size-m" data-id="overview" style="left: 150px; top: 1021px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/C6_overview.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/C6_overview.jpg" alt="Collection Overview" data-node-id="overview" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Collection Overview</div>
+        <div class="node-url">/en/collection/overview</div>
+      </div>
+    </div></div><div class="node size-s" data-id="timeline" style="left: -170px; top: 1032px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/C7_timeline.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/C7_timeline.jpg" alt="Timeline Dutch Hist." data-node-id="timeline" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Timeline Dutch Hist.</div>
+        <div class="node-url">/en/collection/overview/timeline</div>
+      </div>
+    </div></div><div class="node size-s" data-id="themes" style="left: 170px; top: 1282px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/C8_themes.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/C8_themes.jpg" alt="Themes" data-node-id="themes" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Themes</div>
+        <div class="node-url">/en/collection/themes</div>
+      </div>
+    </div></div><div class="node size-m" data-id="nightwatch-artwork" style="left: 150px; top: 1521px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/C9_nightwatch_artwork.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/C9_nightwatch_artwork.jpg" alt="The Night Watch" data-node-id="nightwatch-artwork" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">The Night Watch</div>
+        <div class="node-url">/en/collection/SK-C-5</div>
+      </div>
+    </div></div><div class="node size-m" data-id="artists" style="left: 490px; top: 2021px;">
+    <div class="node-card" style="border-color:#1D9E75; box-shadow: 0 8px 24px -12px #1D9E7580, 0 2px 8px -4px #1D9E7560;">
+      <span class="node-section-tag" style="background:#1D9E75;">Collection</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/C11_artists.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/C11_artists.jpg" alt="Artists / Discover" data-node-id="artists" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Artists / Discover</div>
+        <div class="node-url">/en/collection/discover</div>
+      </div>
+    </div></div><div class="node size-l kind-backend" data-id="data-layer" style="left: -410px; top: 1306.5px;">
+      <div class="node-card" style="border-color:#F5C84C; box-shadow: 0 8px 24px -12px rgba(245,200,76,0.6), 0 2px 8px -4px rgba(245,200,76,0.4);">
+        <span class="node-section-tag">BACKEND</span>
+        <div class="node-thumb" style="height:191px;">
+          <div class="backend-viz">
+            <div class="cylinder">
+              <span class="side"></span>
+              <span class="disc d1"></span>
+              <span class="disc d2"></span>
+            </div>
+            <div class="label-small">non visibile all'utente</div>
+            <div class="tags">
+              <span class="tag">DATABASE</span>
+              <span class="tag">API</span>
+              <span class="tag">CMS</span>
+            </div>
+          </div>
+        </div>
+        <div class="node-meta">
+          <div class="node-title">Collection Database / API</div>
+          <div class="node-url">(backend · non visibile)</div>
+        </div>
+      </div></div><div class="node size-xl" data-id="stories" style="left: 3190px; top: 1282px;">
+    <div class="node-card" style="border-color:#D85A30; box-shadow: 0 8px 24px -12px #D85A3080, 0 2px 8px -4px #D85A3060;">
+      <span class="node-section-tag" style="background:#D85A30;">Stories</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/20_stories.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/20_stories.jpg" alt="Stories" data-node-id="stories" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Stories</div>
+        <div class="node-url">/en/stories</div>
+      </div>
+    </div></div><div class="node size-xl" data-id="support" style="left: 540px; top: 2252px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/21_support.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/21_support.jpg" alt="Support Us" data-node-id="support" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Support Us</div>
+        <div class="node-url">/en/support</div>
+      </div>
+    </div></div><div class="node size-m" data-id="friends" style="left: 130px; top: 2071px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/22_friends.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/22_friends.jpg" alt="Friends" data-node-id="friends" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Friends</div>
+        <div class="node-url">/en/support/friendships/friends</div>
+      </div>
+    </div></div><div class="node size-m" data-id="donate" style="left: 110px; top: 2401px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/23_donate.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/23_donate.jpg" alt="Donate" data-node-id="donate" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Donate</div>
+        <div class="node-url">/en/support/donate</div>
+      </div>
+    </div></div><div class="node size-s" data-id="anbi" style="left: -70px; top: 2692px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/24_anbi.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/24_anbi.jpg" alt="ANBI Info" data-node-id="anbi" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">ANBI Info</div>
+        <div class="node-url">/en/support/donate/anbi-information</div>
+      </div>
+    </div></div><div class="node size-m" data-id="corp-partner" style="left: 430px; top: 2681px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/25_corp_partner.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/25_corp_partner.jpg" alt="Corporate Partnerships" data-node-id="corp-partner" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Corporate Partnerships</div>
+        <div class="node-url">/en/support/corporate</div>
+      </div>
+    </div></div><div class="node size-m" data-id="intl-circle" style="left: 810px; top: 2021px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/S1_intl_circle.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/S1_intl_circle.jpg" alt="International Circle" data-node-id="intl-circle" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">International Circle</div>
+        <div class="node-url">/en/support/international-circle</div>
+      </div>
+    </div></div><div class="node size-m" data-id="funds-fdn" style="left: 970px; top: 2301px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/S2_funds.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/S2_funds.jpg" alt="Funds &amp; Foundations" data-node-id="funds-fdn" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Funds &amp; Foundations</div>
+        <div class="node-url">/en/support/funds-and-foundations</div>
+      </div>
+    </div></div><div class="node size-m" data-id="projects" style="left: 1220px; top: 2531px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/S3_projects.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/S3_projects.jpg" alt="Projects" data-node-id="projects" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Projects</div>
+        <div class="node-url">/en/support/funds-and-foundations/projects</div>
+      </div>
+    </div></div><div class="node size-s" data-id="proj-exhib" style="left: 990px; top: 2822px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/S4_exhibitions.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/S4_exhibitions.jpg" alt="Exhibitions" data-node-id="proj-exhib" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Exhibitions</div>
+        <div class="node-url">/en/support/funds-and-foundations/projects/exhibitions</div>
+      </div>
+    </div></div><div class="node size-s" data-id="proj-acq" style="left: 1270px; top: 2822px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/S5_acquisitions.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/S5_acquisitions.jpg" alt="Acquisitions" data-node-id="proj-acq" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Acquisitions</div>
+        <div class="node-url">/en/support/funds-and-foundations/projects/acquisitions</div>
+      </div>
+    </div></div><div class="node size-s" data-id="proj-diversity" style="left: 1570px; top: 2622px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/S6_diversity.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/S6_diversity.jpg" alt="Diversity &amp; Inclusion" data-node-id="proj-diversity" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Diversity &amp; Inclusion</div>
+        <div class="node-url">/en/support/funds-and-foundations/projects/diversity-inclusion-and-accessibility</div>
+      </div>
+    </div></div><div class="node size-s" data-id="proj-music" style="left: 1570px; top: 2332px;">
+    <div class="node-card" style="border-color:#D4537E; box-shadow: 0 8px 24px -12px #D4537E80, 0 2px 8px -4px #D4537E60;">
+      <span class="node-section-tag" style="background:#D4537E;">Support</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/S7_music.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/S7_music.jpg" alt="Music at the Rijks" data-node-id="proj-music" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Music at the Rijks</div>
+        <div class="node-url">/en/support/funds-and-foundations/projects/music-in-the-rijksmuseum</div>
+      </div>
+    </div></div><div class="node size-xl" data-id="research" style="left: 2590px; top: 2252px;">
+    <div class="node-card" style="border-color:#7F77DD; box-shadow: 0 8px 24px -12px #7F77DD80, 0 2px 8px -4px #7F77DD60;">
+      <span class="node-section-tag" style="background:#7F77DD;">Research</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/29_research.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/29_research.jpg" alt="Research" data-node-id="research" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Research</div>
+        <div class="node-url">/en/research</div>
+      </div>
+    </div></div><div class="node size-m" data-id="our-research" style="left: 2270px; top: 2081px;">
+    <div class="node-card" style="border-color:#7F77DD; box-shadow: 0 8px 24px -12px #7F77DD80, 0 2px 8px -4px #7F77DD60;">
+      <span class="node-section-tag" style="background:#7F77DD;">Research</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/30_our_research.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/30_our_research.jpg" alt="Our Research" data-node-id="our-research" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Our Research</div>
+        <div class="node-url">/en/research/our-research</div>
+      </div>
+    </div></div><div class="node size-m" data-id="conduct-research" style="left: 2270px; top: 2411px;">
+    <div class="node-card" style="border-color:#7F77DD; box-shadow: 0 8px 24px -12px #7F77DD80, 0 2px 8px -4px #7F77DD60;">
+      <span class="node-section-tag" style="background:#7F77DD;">Research</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/31_conduct_research.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/31_conduct_research.jpg" alt="Conduct Research" data-node-id="conduct-research" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Conduct Research</div>
+        <div class="node-url">/en/research/conduct-research</div>
+      </div>
+    </div></div><div class="node size-s" data-id="catalogues" style="left: 2330px; top: 2732px;">
+    <div class="node-card" style="border-color:#7F77DD; box-shadow: 0 8px 24px -12px #7F77DD80, 0 2px 8px -4px #7F77DD60;">
+      <span class="node-section-tag" style="background:#7F77DD;">Research</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/32_catalogues.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/32_catalogues.jpg" alt="Collection Catalogues" data-node-id="catalogues" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Collection Catalogues</div>
+        <div class="node-url">/en/research/collection-catalogues</div>
+      </div>
+    </div></div><div class="node size-s" data-id="fellowship" style="left: 2710px; top: 2712px;">
+    <div class="node-card" style="border-color:#7F77DD; box-shadow: 0 8px 24px -12px #7F77DD80, 0 2px 8px -4px #7F77DD60;">
+      <span class="node-section-tag" style="background:#7F77DD;">Research</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/33_fellowship.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/33_fellowship.jpg" alt="Fellowship" data-node-id="fellowship" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Fellowship</div>
+        <div class="node-url">/en/education/university-education/fellowship</div>
+      </div>
+    </div></div><div class="node size-s" data-id="studies" style="left: 3060px; top: 2712px;">
+    <div class="node-card" style="border-color:#7F77DD; box-shadow: 0 8px 24px -12px #7F77DD80, 0 2px 8px -4px #7F77DD60;">
+      <span class="node-section-tag" style="background:#7F77DD;">Research</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/34_studies.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/34_studies.jpg" alt="Studies in History" data-node-id="studies" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Studies in History</div>
+        <div class="node-url">/en/research/studies-in-history</div>
+      </div>
+    </div></div><div class="node size-s" data-id="image-req" style="left: 3140px; top: 2112px;">
+    <div class="node-card" style="border-color:#7F77DD; box-shadow: 0 8px 24px -12px #7F77DD80, 0 2px 8px -4px #7F77DD60;">
+      <span class="node-section-tag" style="background:#7F77DD;">Research</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/35_image_req.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/35_image_req.jpg" alt="Image Requests" data-node-id="image-req" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Image Requests</div>
+        <div class="node-url">/en/research/image-requests</div>
+      </div>
+    </div></div><div class="node size-s" data-id="faq-research" style="left: 3140px; top: 2382px;">
+    <div class="node-card" style="border-color:#7F77DD; box-shadow: 0 8px 24px -12px #7F77DD80, 0 2px 8px -4px #7F77DD60;">
+      <span class="node-section-tag" style="background:#7F77DD;">Research</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/36_faq_research.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/36_faq_research.jpg" alt="FAQ (Research)" data-node-id="faq-research" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">FAQ (Research)</div>
+        <div class="node-url">/en/footer/faq-collection-and-data</div>
+      </div>
+    </div></div><div class="node size-s" data-id="login" style="left: 3740px; top: 1012px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/37_login.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/37_login.jpg" alt="Login" data-node-id="login" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Login</div>
+        <div class="node-url">/en/login</div>
+      </div>
+    </div></div><div class="node size-s" data-id="newsletter" style="left: 3740px; top: 1242px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/38_newsletter.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/38_newsletter.jpg" alt="Newsletter" data-node-id="newsletter" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Newsletter</div>
+        <div class="node-url">/en/newsletter</div>
+      </div>
+    </div></div><div class="node size-m" data-id="about" style="left: 3630px; top: 1461px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/39_about.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/39_about.jpg" alt="About Us" data-node-id="about" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">About Us</div>
+        <div class="node-url">/en/about-us</div>
+      </div>
+    </div></div><div class="node size-s" data-id="who-we-are" style="left: 3970px; top: 1342px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/39a_who_we_are.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/39a_who_we_are.jpg" alt="Who We Are" data-node-id="who-we-are" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Who We Are</div>
+        <div class="node-url">/en/about-us/who-we-are</div>
+      </div>
+    </div></div><div class="node size-s" data-id="what-we-do" style="left: 3970px; top: 1592px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/39b_what_we_do.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/39b_what_we_do.jpg" alt="What We Do" data-node-id="what-we-do" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">What We Do</div>
+        <div class="node-url">/en/about-us/what-we-do</div>
+      </div>
+    </div></div><div class="node size-s" data-id="press" style="left: 3740px; top: 1702px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/40_press.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/40_press.jpg" alt="Press" data-node-id="press" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Press</div>
+        <div class="node-url">/en/press</div>
+      </div>
+    </div></div><div class="node size-s" data-id="careers" style="left: 3470px; top: 1812px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/41_careers.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/41_careers.jpg" alt="Careers" data-node-id="careers" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Careers</div>
+        <div class="node-url">/en/careers</div>
+      </div>
+    </div></div><div class="node size-s" data-id="contact" style="left: 3470px; top: 1012px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/42_contact.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/42_contact.jpg" alt="Contact" data-node-id="contact" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Contact</div>
+        <div class="node-url">/en/footer/contact</div>
+      </div>
+    </div></div><div class="node size-s" data-id="terms" style="left: 3890px; top: 1932px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/43_terms.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/43_terms.jpg" alt="Terms &amp; Conditions" data-node-id="terms" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Terms &amp; Conditions</div>
+        <div class="node-url">/en/footer/terms-and-conditions</div>
+      </div>
+    </div></div><div class="node size-s" data-id="privacy" style="left: 3890px; top: 2162px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/44_privacy.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/44_privacy.jpg" alt="Privacy Policy" data-node-id="privacy" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Privacy Policy</div>
+        <div class="node-url">/en/footer/privacy-policy</div>
+      </div>
+    </div></div><div class="node size-s" data-id="cookies" style="left: 3630px; top: 2372px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/45_cookies.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/45_cookies.jpg" alt="Cookie Policy" data-node-id="cookies" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">Cookie Policy</div>
+        <div class="node-url">/en/footer/cookie-policy</div>
+      </div>
+    </div></div><div class="node size-s" data-id="ocw" style="left: 3630px; top: 2582px;">
+    <div class="node-card" style="border-color:#8d887f; box-shadow: 0 8px 24px -12px #8d887f80, 0 2px 8px -4px #8d887f60;">
+      <span class="node-section-tag" style="background:#8d887f;">Footer / Legal</span>
+      <div class="node-thumb">
+        <div class="placeholder" style="display: none;">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">img_small/46_ocw.jpg</div>
+        </div>
+      <img src="./Architettura del sito - Rijksmuseum_files/46_ocw.jpg" alt="OCW (Ministry)" data-node-id="ocw" data-tx="0" data-ty="0" data-ts="1" style="transform: translate(0px, 0px) scale(1);"><div class="edit-hint">drag · scroll · dblclick reset</div></div>
+      <div class="node-meta">
+        <div class="node-title">OCW (Ministry)</div>
+        <div class="node-url">/en/footer/ocw</div>
+      </div>
+    </div></div></div>
+  </div>
+</div>
+
+<!-- ============ LEGEND ============ -->
+<div class="legend">
+  <h3>Legenda</h3>
+  <div class="legend-grid" id="legend-grid"><div class="legend-item"><div class="legend-swatch" style="background:#4a4640"></div><span>Home</span></div><div class="legend-item"><div class="legend-swatch" style="background:#3B8BD4"></div><span>Visit &amp; Tickets</span></div><div class="legend-item"><div class="legend-swatch" style="background:#BA7517"></div><span>What's On</span></div><div class="legend-item"><div class="legend-swatch" style="background:#1D9E75"></div><span>Collection</span></div><div class="legend-item"><div class="legend-swatch" style="background:#D85A30"></div><span>Stories</span></div><div class="legend-item"><div class="legend-swatch" style="background:#D4537E"></div><span>Support</span></div><div class="legend-item"><div class="legend-swatch" style="background:#7F77DD"></div><span>Research</span></div><div class="legend-item"><div class="legend-swatch" style="background:#8d887f"></div><span>Footer / Legal</span></div></div>
+  <div class="arrow-legend">
+    <span>
+      <svg width="36" height="10" viewBox="0 0 36 10">
+        <line x1="2" y1="5" x2="28" y2="5" stroke="#2a2620" stroke-width="2.2" stroke-opacity="0.7"></line>
+        <path d="M26,2 L32,5 L26,8 z" fill="#2a2620"></path>
+      </svg>
+      link primario
+    </span>
+    <span>
+      <svg width="36" height="10" viewBox="0 0 36 10">
+        <line x1="2" y1="5" x2="28" y2="5" stroke="#a7a299" stroke-width="0.8" stroke-dasharray="3 3"></line>
+        <path d="M26,2 L32,5 L26,8 z" fill="#a7a299"></path>
+      </svg>
+      link footer
+    </span>
+  </div>
+  <div class="legend-meta">
+    Trascina · Scorri per zoom · Click su una pagina
+  </div>
+</div>
+
+<!-- ============ INFO BAR ============ -->
+<div class="infobar" id="infobar">
+  <div class="label">Pagina selezionata</div>
+  <div class="hint">Clicca una miniatura per vederne dettagli e connessioni.</div>
+</div>
+
+<!-- ============ DATA + LOGIC ============ -->
+<script>
+/* ========= SEZIONI ========= */
+const SECTIONS = {
+  home:       { label: 'Home',            color: '#4a4640' },
+  visit:      { label: 'Visit & Tickets', color: '#3B8BD4' },
+  whatson:    { label: "What's On",       color: '#BA7517' },
+  collection: { label: 'Collection',      color: '#1D9E75' },
+  stories:    { label: 'Stories',         color: '#D85A30' },
+  support:    { label: 'Support',         color: '#D4537E' },
+  research:   { label: 'Research',        color: '#7F77DD' },
+  footer:     { label: 'Footer / Legal',  color: '#8d887f' },
+};
+
+/* ========= NODI =========
+   Ogni nodo ha x/y curati manualmente.
+   Canvas virtuale: 4200 × 3200.
+   Home al centro; sezioni principali a "petali" intorno; footer a destra.
+*/
+const NODES = [
+  // ===== HOME (centro) =====
+  { id:'home', label:'Home', url:'/en', section:'home', size:'xxl',
+    x: 1900, y: 1450, thumb:'img_small/01_home.jpg' },
+
+  // ===== VISIT & TICKETS (in alto a sinistra) =====
+  { id:'visit',         label:'Visit',                   url:'/en/visit',                                        section:'visit', size:'xl', x: 700,  y: 400,  thumb:'img_small/02_visit.jpg' },
+  { id:'tickets',       label:'Tickets',                 url:'/en/tickets',                                      section:'visit', size:'l', x: 1100, y: 200,  thumb:'img_small/03_tickets.jpg' },
+  { id:'practical',     label:'Practical Info',          url:'/en/visit/practical-info',                         section:'visit', size:'s', x: 300,  y: 180,  thumb:'img_small/04_practical.jpg' },
+  { id:'families',      label:'Families & Children',     url:'/en/families-and-children',                        section:'visit', size:'m', x: 320,  y: 720,  thumb:'img_small/05_families.jpg' },
+  { id:'groups',        label:'Groups',                  url:'/en/groups',                                       section:'visit', size:'s', x: 680,  y: 900,  thumb:'img_small/06_groups.jpg' },
+  { id:'accessibility', label:'Accessibility',           url:'/en/visit/accessibility',                          section:'visit', size:'s', x: 40,   y: 420,  thumb:'img_small/07_accessibility.jpg' },
+  { id:'acc-statement', label:'Accessibility Statement', url:'/en/visit/accessibility/accessibility-statement', section:'visit', size:'s', x: 40,   y: 680,  thumb:'img_small/08_accessibility_statement.jpg' },
+  { id:'app',           label:'App',                     url:'/en/app',                                          section:'visit', size:'s', x: 1080, y: 640,  thumb:'img_small/09_app.jpg' },
+  { id:'faq-visit',     label:'FAQ (Visit)',             url:'/en/visit/faq',                                    section:'visit', size:'s', x: 1450, y: 400,  thumb:'img_small/10_faq_visit.jpg' },
+  { id:'education',     label:'Education',               url:'/en/education',                                    section:'visit', size:'l', x: 1450, y: 700,  thumb:'img_small/11_education.jpg' },
+  { id:'intl-schools',  label:'International Schools',   url:'/en/education/schools',                            section:'visit', size:'s', x: 1450, y: 970,  thumb:'img_small/11a_intl_schools.jpg' },
+  { id:'university-ed', label:'University Education',   url:'/en/education/university-education',               section:'visit', size:'m', x: 1830, y: 700,  thumb:'img_small/11b_university_ed.jpg' },
+  { id:'summer-inst',   label:'Summer Institute',        url:'/en/education/university-education/summer-institute', section:'visit', size:'s', x: 1830, y: 960,  thumb:'img_small/11c_summer_institute.jpg' },
+  { id:'artist-res',    label:'Artist in Residence',     url:'/en/education/university-education/artist-in-residence-programme', section:'visit', size:'s', x: 1830, y: 1190, thumb:'img_small/11d_artist_residence.jpg' },
+
+  // ===== WHAT'S ON (in alto a destra) =====
+  { id:'whatson',       label:"What's On",               url:'/en/whats-on',                                     section:'whatson', size:'xl', x: 2600, y: 400,  thumb:'img_small/12_whatson.jpg' },
+  { id:'nightwatch',    label:'Operation Night Watch',   url:'/en/whats-on/exhibitions/operation-night-watch',  section:'whatson', size:'l', x: 3050, y: 180,  thumb:'img_small/13_nightwatch.jpg' },
+  { id:'metamorphoses', label:'Metamorphoses',           url:'/en/whats-on/exhibitions/metamorphoses',          section:'whatson', size:'m', x: 2350, y: 100,  thumb:'img_small/14_metamorphoses.jpg' },
+  { id:'fake',          label:'FAKE!',                   url:'/en/whats-on/exhibitions/fake',                   section:'whatson', size:'s', x: 3420, y: 400,  thumb:'img_small/15_fake.jpg' },
+  { id:'womensmonth',   label:"Women's Month",           url:'/en/whats-on/womensmonth',                        section:'whatson', size:'s', x: 3420, y: 680,  thumb:'img_small/16_womensmonth.jpg' },
+  { id:'guidedtours',   label:'Guided Tours',            url:'/en/whats-on/guided-tours/the-best-of-the-rijksmuseum', section:'whatson', size:'s', x: 2940, y: 640, thumb:'img_small/17_guidedtours.jpg' },
+  { id:'past-exhib',    label:'Past Exhibitions',        url:'/en/whats-on/exhibitions/past',                   section:'whatson', size:'s', x: 2600, y: 780,  thumb:'img_small/18_past_exhib.jpg' },
+
+  // ===== COLLECTION (sinistra centro) =====
+  { id:'collection',    label:'Collection',              url:'/en/collection',                                   section:'collection', size:'xl', x: 1120,  y: 1430, thumb:'img_small/19_collection.jpg' },
+  // Sottopagine disposte a SINISTRA del riquadro principale (tre colonne)
+  { id:'search',              label:'Search Collection',  url:'/en/collection/search',                     section:'collection', size:'m', x: 620,  y: 1120, thumb:'img_small/C1_search.jpg' },
+  { id:'masterpieces',        label:'Masterpieces',       url:'/en/masterpieces-up-close',                section:'collection', size:'m', x: 620,  y: 1370, thumb:'img_small/C2_masterpieces.jpg' },
+  { id:'rijksstudio',         label:'Rijksstudio',        url:'/en/rijksstudio',                           section:'collection', size:'m', x: 640,  y: 1620, thumb:'img_small/C3_rijksstudio.jpg' },
+  { id:'art-explorer',        label:'Art Explorer',       url:'/en/collection/art-explorer',              section:'collection', size:'m', x: 620,  y: 1870, thumb:'img_small/C4_art_explorer.jpg' },
+  { id:'art-explorer-q',      label:'What Do You Love?',  url:'/en/collection/art-explorer/what-do-you-love', section:'collection', size:'s', x: 280,  y: 1870, thumb:'img_small/C5_what_do_you_love.jpg' },
+  { id:'overview',            label:'Collection Overview',url:'/en/collection/overview',                   section:'collection', size:'m', x: 280,  y: 1120, thumb:'img_small/C6_overview.jpg' },
+  { id:'timeline',            label:'Timeline Dutch Hist.',url:'/en/collection/overview/timeline',         section:'collection', size:'s', x: -60,   y: 1120, thumb:'img_small/C7_timeline.jpg' },
+  { id:'themes',              label:'Themes',             url:'/en/collection/themes',                     section:'collection', size:'s', x: 280,  y: 1370, thumb:'img_small/C8_themes.jpg' },
+  { id:'nightwatch-artwork',  label:'The Night Watch',    url:'/en/collection/SK-C-5',                     section:'collection', size:'m', x: 280,  y: 1620, thumb:'img_small/C9_nightwatch_artwork.jpg' },
+  { id:'artists',             label:'Artists / Discover', url:'/en/collection/discover',                   section:'collection', size:'m', x: 620,  y: 2120, thumb:'img_small/C11_artists.jpg' },
+  // Data layer: nodo speciale all'ESTREMO SINISTRO, fuori dal cluster
+  { id:'data-layer',          label:'Collection Database / API', url:'(backend · non visibile)',          section:'collection', size:'l', x: -240, y: 1430, thumb:'img_small/C10_data_layer.jpg', kind:'backend' },
+
+  // ===== STORIES (destra centro) =====
+  { id:'stories',       label:'Stories',                 url:'/en/stories',                                      section:'stories', size:'xl', x: 3400, y: 1430, thumb:'img_small/20_stories.jpg' },
+
+  // ===== SUPPORT (in basso a sinistra) =====
+  { id:'support',       label:'Support Us',              url:'/en/support',                                      section:'support', size:'xl', x: 750,  y: 2400, thumb:'img_small/21_support.jpg' },
+  { id:'friends',       label:'Friends',                 url:'/en/support/friendships/friends',                  section:'support', size:'m', x: 260,  y: 2170, thumb:'img_small/22_friends.jpg' },
+  { id:'donate',        label:'Donate',                  url:'/en/support/donate',                               section:'support', size:'m', x: 240,  y: 2500, thumb:'img_small/23_donate.jpg' },
+  { id:'anbi',          label:'ANBI Info',               url:'/en/support/donate/anbi-information',              section:'support', size:'s', x: 40,   y: 2780, thumb:'img_small/24_anbi.jpg' },
+  { id:'corp-partner',  label:'Corporate Partnerships',  url:'/en/support/corporate',                            section:'support', size:'m', x: 560,  y: 2780, thumb:'img_small/25_corp_partner.jpg' },
+  { id:'intl-circle',   label:'International Circle',    url:'/en/support/international-circle',                 section:'support', size:'m', x: 940,  y: 2120, thumb:'img_small/S1_intl_circle.jpg' },
+  { id:'funds-fdn',     label:'Funds & Foundations',     url:'/en/support/funds-and-foundations',                section:'support', size:'m', x: 1100, y: 2400, thumb:'img_small/S2_funds.jpg' },
+  { id:'projects',      label:'Projects',                url:'/en/support/funds-and-foundations/projects',       section:'support', size:'m', x: 1350, y: 2630, thumb:'img_small/S3_projects.jpg' },
+  { id:'proj-exhib',    label:'Exhibitions',             url:'/en/support/funds-and-foundations/projects/exhibitions', section:'support', size:'s', x: 1100, y: 2910, thumb:'img_small/S4_exhibitions.jpg' },
+  { id:'proj-acq',      label:'Acquisitions',            url:'/en/support/funds-and-foundations/projects/acquisitions', section:'support', size:'s', x: 1380, y: 2910, thumb:'img_small/S5_acquisitions.jpg' },
+  { id:'proj-diversity',label:'Diversity & Inclusion',   url:'/en/support/funds-and-foundations/projects/diversity-inclusion-and-accessibility', section:'support', size:'s', x: 1680, y: 2710, thumb:'img_small/S6_diversity.jpg' },
+  { id:'proj-music',    label:'Music at the Rijks',      url:'/en/support/funds-and-foundations/projects/music-in-the-rijksmuseum', section:'support', size:'s', x: 1680, y: 2420, thumb:'img_small/S7_music.jpg' },
+
+  // ===== RESEARCH (in basso a destra) =====
+  { id:'research',         label:'Research',              url:'/en/research',                                   section:'research', size:'xl', x: 2800, y: 2400, thumb:'img_small/29_research.jpg' },
+  { id:'our-research',     label:'Our Research',          url:'/en/research/our-research',                      section:'research', size:'m', x: 2400, y: 2180, thumb:'img_small/30_our_research.jpg' },
+  { id:'conduct-research', label:'Conduct Research',     url:'/en/research/conduct-research',                  section:'research', size:'m', x: 2400, y: 2510, thumb:'img_small/31_conduct_research.jpg' },
+  { id:'catalogues',       label:'Collection Catalogues', url:'/en/research/collection-catalogues',            section:'research', size:'s', x: 2440, y: 2820, thumb:'img_small/32_catalogues.jpg' },
+  { id:'fellowship',       label:'Fellowship',            url:'/en/education/university-education/fellowship',  section:'research', size:'s', x: 2820, y: 2800, thumb:'img_small/33_fellowship.jpg' },
+  { id:'studies',          label:'Studies in History',    url:'/en/research/studies-in-history',                section:'research', size:'s', x: 3170, y: 2800, thumb:'img_small/34_studies.jpg' },
+  { id:'image-req',        label:'Image Requests',        url:'/en/research/image-requests',                    section:'research', size:'s', x: 3250, y: 2200, thumb:'img_small/35_image_req.jpg' },
+  { id:'faq-research',     label:'FAQ (Research)',        url:'/en/footer/faq-collection-and-data',             section:'research', size:'s', x: 3250, y: 2470, thumb:'img_small/36_faq_research.jpg' },
+
+  // ===== FOOTER / LEGAL (estrema destra, colonna) =====
+  { id:'login',       label:'Login',               url:'/en/login',                       section:'footer', size:'s', x: 3850, y: 1100, thumb:'img_small/37_login.jpg' },
+  { id:'newsletter',  label:'Newsletter',          url:'/en/newsletter',                  section:'footer', size:'s', x: 3850, y: 1330, thumb:'img_small/38_newsletter.jpg' },
+  { id:'about',       label:'About Us',            url:'/en/about-us',                    section:'footer', size:'m', x: 3760, y: 1560, thumb:'img_small/39_about.jpg' },
+  { id:'who-we-are', label:'Who We Are',          url:'/en/about-us/who-we-are',         section:'footer', size:'s', x: 4080, y: 1430, thumb:'img_small/39a_who_we_are.jpg' },
+  { id:'what-we-do', label:'What We Do',          url:'/en/about-us/what-we-do',         section:'footer', size:'s', x: 4080, y: 1680, thumb:'img_small/39b_what_we_do.jpg' },
+  { id:'press',       label:'Press',               url:'/en/press',                       section:'footer', size:'s', x: 3850, y: 1790, thumb:'img_small/40_press.jpg' },
+  { id:'careers',     label:'Careers',             url:'/en/careers',                     section:'footer', size:'s', x: 3580, y: 1900, thumb:'img_small/41_careers.jpg' },
+  { id:'contact',     label:'Contact',             url:'/en/footer/contact',              section:'footer', size:'s', x: 3580, y: 1100, thumb:'img_small/42_contact.jpg' },
+  { id:'terms',       label:'Terms & Conditions',  url:'/en/footer/terms-and-conditions', section:'footer', size:'s', x: 4000, y: 2020, thumb:'img_small/43_terms.jpg' },
+  { id:'privacy',     label:'Privacy Policy',      url:'/en/footer/privacy-policy',       section:'footer', size:'s', x: 4000, y: 2250, thumb:'img_small/44_privacy.jpg' },
+  { id:'cookies',     label:'Cookie Policy',       url:'/en/footer/cookie-policy',        section:'footer', size:'s', x: 3740, y: 2460, thumb:'img_small/45_cookies.jpg' },
+  { id:'ocw',         label:'OCW (Ministry)',      url:'/en/footer/ocw',                  section:'footer', size:'s', x: 3740, y: 2670, thumb:'img_small/46_ocw.jpg' },
+];
+
+/* ========= LINKS ========= */
+const LINKS_RAW = [
+  // HOME -> tutto
+  {s:'home',t:'visit',w:'primary'},{s:'home',t:'whatson',w:'primary'},{s:'home',t:'collection',w:'primary'},
+  {s:'home',t:'stories',w:'primary'},{s:'home',t:'support',w:'primary'},{s:'home',t:'research',w:'primary'},
+  {s:'home',t:'families',w:'secondary'},{s:'home',t:'tickets',w:'secondary'},{s:'home',t:'login',w:'secondary'},
+  {s:'home',t:'newsletter',w:'secondary'},{s:'home',t:'about',w:'secondary'},{s:'home',t:'press',w:'secondary'},
+  {s:'home',t:'careers',w:'secondary'},{s:'home',t:'contact',w:'secondary'},{s:'home',t:'donate',w:'secondary'},
+  {s:'home',t:'metamorphoses',w:'secondary'},{s:'home',t:'friends',w:'secondary'},{s:'home',t:'nightwatch',w:'secondary'},
+  {s:'home',t:'terms',w:'footer'},{s:'home',t:'privacy',w:'footer'},{s:'home',t:'cookies',w:'footer'},
+  {s:'home',t:'ocw',w:'footer'},
+  {s:'about',t:'who-we-are',w:'primary'},
+  {s:'about',t:'what-we-do',w:'primary'},
+
+  // VISIT cluster
+  {s:'visit',t:'practical',w:'primary'},{s:'visit',t:'families',w:'primary'},{s:'visit',t:'groups',w:'primary'},
+  {s:'visit',t:'friends',w:'secondary'},{s:'visit',t:'education',w:'primary'},{s:'visit',t:'accessibility',w:'primary'},
+  {s:'visit',t:'press',w:'secondary'},{s:'visit',t:'whatson',w:'primary'},{s:'visit',t:'tickets',w:'primary'},
+  {s:'visit',t:'nightwatch',w:'secondary'},{s:'visit',t:'faq-visit',w:'primary'},{s:'visit',t:'app',w:'primary'},
+  {s:'accessibility',t:'acc-statement',w:'primary'},
+  {s:'education',t:'intl-schools',w:'primary'},
+  {s:'education',t:'university-ed',w:'primary'},
+  {s:'university-ed',t:'summer-inst',w:'primary'},
+  {s:'university-ed',t:'artist-res',w:'primary'},
+  {s:'university-ed',t:'fellowship',w:'secondary'},
+
+  // WHAT'S ON cluster
+  {s:'whatson',t:'metamorphoses',w:'primary'},{s:'whatson',t:'fake',w:'primary'},{s:'whatson',t:'womensmonth',w:'primary'},
+  {s:'whatson',t:'guidedtours',w:'primary'},{s:'whatson',t:'nightwatch',w:'primary'},{s:'whatson',t:'app',w:'secondary'},
+  {s:'whatson',t:'past-exhib',w:'primary'},
+
+  // RESEARCH cluster
+  {s:'research',t:'our-research',w:'primary'},{s:'research',t:'conduct-research',w:'primary'},
+  {s:'research',t:'catalogues',w:'primary'},{s:'research',t:'fellowship',w:'primary'},
+  {s:'research',t:'studies',w:'primary'},{s:'research',t:'image-req',w:'primary'},{s:'research',t:'faq-research',w:'primary'},
+
+  // SUPPORT cluster
+  {s:'support',t:'friends',w:'primary'},{s:'support',t:'donate',w:'primary'},{s:'support',t:'corp-partner',w:'primary'},
+  {s:'support',t:'intl-circle',w:'primary'},{s:'support',t:'funds-fdn',w:'primary'},
+  {s:'donate',t:'anbi',w:'primary'},
+  {s:'funds-fdn',t:'projects',w:'primary'},
+  {s:'projects',t:'proj-exhib',w:'primary'},{s:'projects',t:'proj-acq',w:'primary'},
+  {s:'projects',t:'proj-diversity',w:'primary'},{s:'projects',t:'proj-music',w:'primary'},
+
+  // COLLECTION cluster (sottopagine principali)
+  {s:'collection',t:'search',w:'primary'},
+  {s:'collection',t:'masterpieces',w:'primary'},
+  {s:'collection',t:'rijksstudio',w:'primary'},
+  {s:'collection',t:'art-explorer',w:'primary'},
+  {s:'collection',t:'overview',w:'primary'},
+  {s:'collection',t:'themes',w:'primary'},
+  {s:'collection',t:'artists',w:'primary'},
+  {s:'collection',t:'nightwatch-artwork',w:'secondary'},
+  {s:'art-explorer',t:'art-explorer-q',w:'primary'},
+  {s:'overview',t:'timeline',w:'primary'},
+  {s:'masterpieces',t:'nightwatch-artwork',w:'secondary'},
+  {s:'artists',t:'nightwatch-artwork',w:'secondary'},
+  // Data layer
+  {s:'data-layer',t:'collection',w:'primary'},
+  {s:'data-layer',t:'search',w:'primary'},
+  {s:'data-layer',t:'rijksstudio',w:'primary'},
+  {s:'data-layer',t:'art-explorer',w:'primary'},
+  {s:'data-layer',t:'artists',w:'primary'},
+  {s:'data-layer',t:'nightwatch-artwork',w:'secondary'},
+  {s:'data-layer',t:'masterpieces',w:'secondary'},
+];
+
+// footer soft links: ogni sezione principale -> pagine footer (tratteggio sottile)
+const footerTargets = ['about','press','careers','contact','donate','newsletter','terms','privacy','cookies','ocw'];
+['visit','whatson','collection','stories','support','research'].forEach(sec => {
+  footerTargets.forEach(tg => {
+    if (!LINKS_RAW.find(l => l.s === sec && l.t === tg)) {
+      LINKS_RAW.push({ s: sec, t: tg, w: 'footer' });
+    }
+  });
+});
+
+/* ========= IMAGE TRANSFORM (edit-mode) ========= */
+const IMG_TRANSFORM_KEY = 'rijksmap_imgTransforms_v1';
+let imgTransforms = {};
+try { imgTransforms = JSON.parse(localStorage.getItem(IMG_TRANSFORM_KEY) || '{}'); } catch(e) {}
+function loadImgTransform(id) {
+  return imgTransforms[id] || { x: 0, y: 0, s: 1 };
+}
+function saveImgTransform(id, t) {
+  imgTransforms[id] = t;
+  try { localStorage.setItem(IMG_TRANSFORM_KEY, JSON.stringify(imgTransforms)); } catch(e) {}
+}
+function applyImgTransform(img, t) {
+  img.dataset.tx = t.x;
+  img.dataset.ty = t.y;
+  img.dataset.ts = t.s;
+  img.style.transform = `translate(${t.x}px, ${t.y}px) scale(${t.s})`;
+}
+
+/* ========= RENDER ========= */
+const CANVAS_W = 4300;
+const CANVAS_H = 3300;
+const canvas = document.getElementById('canvas');
+const canvasBg = document.getElementById('canvas-bg');
+const canvasWrap = document.getElementById('canvas-wrap');
+const svgEl = document.getElementById('links-svg');
+const linksGroup = document.getElementById('links-group');
+const nodesGroup = document.getElementById('nodes-group');
+const sectionsGroup = document.getElementById('sections-group');
+
+canvas.style.width = CANVAS_W + 'px';
+canvas.style.height = CANVAS_H + 'px';
+canvasBg.style.width = CANVAS_W + 'px';
+canvasBg.style.height = CANVAS_H + 'px';
+svgEl.setAttribute('width', CANVAS_W);
+svgEl.setAttribute('height', CANVAS_H);
+
+/* ----- render section halos ----- */
+const SECTION_BOUNDS = {
+  visit:      { x1: -100,   y1: 50,   x2: 2010, y2: 1310, label: 'VISIT & TICKETS' },
+  whatson:    { x1: 2190, y1: -30, x2: 3560, y2: 900, label: "WHAT'S ON" },
+  collection: { x1: -440,y1: 990,  x2: 1360, y2: 2260, label: 'COLLECTION' },
+  stories:    { x1: 3160, y1: 1255, x2: 3640, y2: 1610, label: 'STORIES' },
+  support:    { x1: -100,  y1: 1990, x2: 1820, y2: 3030, label: 'SUPPORT' },
+  research:   { x1: 2240, y1: 2050, x2: 3390, y2: 2940, label: 'RESEARCH' },
+  footer:     { x1: 3440,  y1: 980, x2: 4220, y2: 2790, label: 'FOOTER / LEGAL' },
+};
+
+Object.entries(SECTION_BOUNDS).forEach(([key, b]) => {
+  const halo = document.createElement('div');
+  halo.className = 'section-halo';
+  halo.style.left = b.x1 + 'px';
+  halo.style.top = b.y1 + 'px';
+  halo.style.width = (b.x2 - b.x1) + 'px';
+  halo.style.height = (b.y2 - b.y1) + 'px';
+  halo.style.background = SECTIONS[key].color;
+  halo.style.opacity = '0.07';
+  sectionsGroup.appendChild(halo);
+
+  // default label position: just OUTSIDE the bounds
+  // top sections (visit/whatson) → above; others → below; collection/stories → to the side
+  const defaultPos = (() => {
+    if (key === 'visit' || key === 'whatson') return { x: b.x1, y: b.y1 - 64 };
+    if (key === 'collection')                  return { x: b.x1, y: b.y1 - 64 };
+    if (key === 'stories')                     return { x: b.x2 - 180, y: b.y1 - 64 };
+    if (key === 'support' || key === 'research') return { x: b.x1, y: b.y2 + 20 };
+    if (key === 'footer')                      return { x: b.x1, y: b.y1 - 64 };
+    return { x: b.x1, y: b.y1 - 64 }; // home fallback
+  })();
+
+  // load saved position from localStorage
+  const saved = (() => {
+    try {
+      const v = JSON.parse(localStorage.getItem('rm-label-' + key) || 'null');
+      if (v && typeof v.x === 'number' && typeof v.y === 'number') return v;
+    } catch (e) {}
+    return defaultPos;
+  })();
+
+  const lbl = document.createElement('div');
+  lbl.className = 'section-label draggable-label';
+  lbl.style.left = saved.x + 'px';
+  lbl.style.top  = saved.y + 'px';
+  lbl.style.background = SECTIONS[key].color;
+  lbl.textContent = b.label;
+  lbl.dataset.key = key;
+  lbl.title = 'Trascina per spostare · doppio click per reset';
+  sectionsGroup.appendChild(lbl);
+
+  // --- drag behaviour (in canvas coords; compensate for current zoom) ---
+  let dragging = false, sx = 0, sy = 0, ox = 0, oy = 0;
+  lbl.addEventListener('pointerdown', (e) => {
+    e.stopPropagation();
+    dragging = true;
+    sx = e.clientX; sy = e.clientY;
+    ox = parseFloat(lbl.style.left) || 0;
+    oy = parseFloat(lbl.style.top)  || 0;
+    lbl.setPointerCapture(e.pointerId);
+    lbl.classList.add('dragging');
+  });
+  lbl.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const k = (window.__viewScale || 1);
+    lbl.style.left = (ox + (e.clientX - sx) / k) + 'px';
+    lbl.style.top  = (oy + (e.clientY - sy) / k) + 'px';
+  });
+  const endDrag = (e) => {
+    if (!dragging) return;
+    dragging = false;
+    lbl.classList.remove('dragging');
+    try {
+      localStorage.setItem('rm-label-' + key, JSON.stringify({
+        x: parseFloat(lbl.style.left),
+        y: parseFloat(lbl.style.top),
+      }));
+    } catch(err) {}
+  };
+  lbl.addEventListener('pointerup', endDrag);
+  lbl.addEventListener('pointercancel', endDrag);
+  // double-click → reset to default
+  lbl.addEventListener('dblclick', (e) => {
+    e.stopPropagation();
+    lbl.style.left = defaultPos.x + 'px';
+    lbl.style.top  = defaultPos.y + 'px';
+    try { localStorage.removeItem('rm-label-' + key); } catch(err) {}
+  });
+});
+
+/* ----- render nodes ----- */
+const nodeById = {};
+NODES.forEach(n => { nodeById[n.id] = n; });
+
+function sizeToPx(size) {
+  const map = {
+    // 16:9 thumbnails matching the 1920×1080 screenshots
+    xxl:{ w: 680, h: 383, total: 443 },  // Home
+    xl: { w: 420, h: 236, total: 296 },  // Hub di sezione
+    l:  { w: 340, h: 191, total: 247 },  // Pagine principali
+    m:  { w: 260, h: 146, total: 198 },
+    s:  { w: 220, h: 124, total: 176 },
+  };
+  return map[size] || map.m;
+}
+
+NODES.forEach(n => {
+  const dims = sizeToPx(n.size);
+  const el = document.createElement('div');
+  el.className = `node size-${n.size}` + (n.kind ? ` kind-${n.kind}` : '');
+  el.dataset.id = n.id;
+  // position = top-left; we want n.x / n.y to be node center
+  const left = n.x - dims.w / 2;
+  const top  = n.y - dims.total / 2;
+  el.style.left = left + 'px';
+  el.style.top  = top + 'px';
+
+  const secColor = SECTIONS[n.section].color;
+
+  if (n.kind === 'backend') {
+    // rendering speciale per il data layer
+    el.innerHTML = `
+      <div class="node-card" style="border-color:#F5C84C; box-shadow: 0 8px 24px -12px rgba(245,200,76,0.6), 0 2px 8px -4px rgba(245,200,76,0.4);">
+        <span class="node-section-tag">BACKEND</span>
+        <div class="node-thumb" style="height:${dims.h}px;">
+          <div class="backend-viz">
+            <div class="cylinder">
+              <span class="side"></span>
+              <span class="disc d1"></span>
+              <span class="disc d2"></span>
+            </div>
+            <div class="label-small">non visibile all'utente</div>
+            <div class="tags">
+              <span class="tag">DATABASE</span>
+              <span class="tag">API</span>
+              <span class="tag">CMS</span>
+            </div>
+          </div>
+        </div>
+        <div class="node-meta">
+          <div class="node-title">${n.label}</div>
+          <div class="node-url">${n.url}</div>
+        </div>
+      </div>`;
+    nodesGroup.appendChild(el);
+    n._w = dims.w;
+    n._h = dims.total;
+    n._left = left;
+    n._top  = top;
+    return; // niente preload immagine per il backend
+  }
+
+  el.innerHTML = `
+    <div class="node-card" style="border-color:${secColor}; box-shadow: 0 8px 24px -12px ${secColor}80, 0 2px 8px -4px ${secColor}60;">
+      <span class="node-section-tag" style="background:${secColor};">${SECTIONS[n.section].label}</span>
+      <div class="node-thumb">
+        <div class="placeholder">
+          <div class="ph-icon">□</div>
+          <div class="ph-label">screenshot</div>
+          <div class="ph-filename">${n.thumb}</div>
+        </div>
+      </div>
+      <div class="node-meta">
+        <div class="node-title">${n.label}</div>
+        <div class="node-url">${n.url}</div>
+      </div>
+    </div>`;
+  nodesGroup.appendChild(el);
+
+  // Cache computed dimensions for link routing
+  n._w = dims.w;
+  n._h = dims.total;
+  n._left = left;
+  n._top = top;
+
+  const lookup = window.__thumbLookup || {};
+  const resId = lookup[n.thumb];
+  const resolvedSrc = (resId && window.__resources && window.__resources[resId]) ? window.__resources[resId] : n.thumb;
+  const probe = new Image();
+  probe.onload = () => {
+    const thumb = el.querySelector('.node-thumb');
+    const placeholder = thumb.querySelector('.placeholder');
+    const img = document.createElement('img');
+    img.src = resolvedSrc;
+    img.alt = n.label;
+    img.dataset.nodeId = n.id;
+    thumb.appendChild(img);
+    const hint = document.createElement('div');
+    hint.className = 'edit-hint';
+    hint.textContent = 'drag · scroll · dblclick reset';
+    thumb.appendChild(hint);
+    applyImgTransform(img, loadImgTransform(n.id));
+    if (placeholder) placeholder.style.display = 'none';
+  };
+  probe.onerror = () => {};
+  probe.src = resolvedSrc;
+});
+
+/* ----- render links (curved SVG paths) ----- */
+function makePath(s, t) {
+  // from source center bottom-ish toward target, curved cubic
+  const dx = t.x - s.x;
+  const dy = t.y - s.y;
+  const dist = Math.hypot(dx, dy);
+  // control point offset perpendicular to the line for a gentle curve
+  const cx = (s.x + t.x) / 2;
+  const cy = (s.y + t.y) / 2;
+  // perpendicular
+  const nx = -dy / (dist || 1);
+  const ny = dx  / (dist || 1);
+  const bend = Math.min(dist * 0.15, 80);
+  // shift control point in a consistent direction (right-hand side)
+  const ctrlX = cx + nx * bend;
+  const ctrlY = cy + ny * bend;
+
+  // trim endpoints so arrow tip lands at edge of target card (not center)
+  // compute point on line from target toward source, offset by half the target's shorter dim
+  const tHalfW = t._w / 2;
+  const tHalfH = t._h / 2;
+  const sHalfW = s._w / 2;
+  const sHalfH = s._h / 2;
+
+  // intersection of line (cx,cy)->(t.x,t.y) with target rect
+  function edgePoint(node, fromX, fromY) {
+    const vx = node.x - fromX;
+    const vy = node.y - fromY;
+    const hw = node._w / 2;
+    const hh = node._h / 2;
+    // parametrize: point = (fromX,fromY) + u*(vx,vy); find largest u <=1 where still outside rect
+    // Instead compute intersection with rect edges
+    if (vx === 0 && vy === 0) return { x: node.x, y: node.y };
+    const tx = vx !== 0 ? (hw) / Math.abs(vx) : Infinity;
+    const ty = vy !== 0 ? (hh) / Math.abs(vy) : Infinity;
+    const k = Math.min(tx, ty);
+    return {
+      x: node.x - vx * k * 0.95, // pull slightly in
+      y: node.y - vy * k * 0.95
+    };
+  }
+
+  const start = edgePoint(s, ctrlX, ctrlY);
+  const end   = edgePoint(t, ctrlX, ctrlY);
+
+  return `M ${start.x} ${start.y} Q ${ctrlX} ${ctrlY} ${end.x} ${end.y}`;
+}
+
+const linkPaths = [];
+LINKS_RAW.forEach(l => {
+  const s = nodeById[l.s];
+  const t = nodeById[l.t];
+  if (!s || !t) return;
+  const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+  path.setAttribute('d', makePath(s, t));
+  path.setAttribute('class', `link-path ${l.w === 'primary' ? 'primary' : l.w === 'footer' ? 'footer-link' : 'secondary'}`);
+  const marker = l.w === 'primary' ? 'arrow-primary' : l.w === 'footer' ? 'arrow-footer' : 'arrow-secondary';
+  path.setAttribute('marker-end', `url(#${marker})`);
+  path.dataset.source = l.s;
+  path.dataset.target = l.t;
+  linksGroup.appendChild(path);
+  linkPaths.push({ el: path, s: l.s, t: l.t });
+});
+
+/* ========= LEGEND POPULATION ========= */
+const legendGrid = document.getElementById('legend-grid');
+Object.entries(SECTIONS).forEach(([k, v]) => {
+  const el = document.createElement('div');
+  el.className = 'legend-item';
+  el.innerHTML = `<div class="legend-swatch" style="background:${v.color}"></div><span>${v.label}</span>`;
+  legendGrid.appendChild(el);
+});
+
+/* ========= ZOOM + PAN ========= */
+let scale = 0.32;  // start zoomed out to fit
+let tx = 200, ty = 80;
+const minScale = 0.15, maxScale = 2.0;
+const zoomLabel = document.getElementById('zoom-level');
+
+function applyTransform() {
+  canvas.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+  zoomLabel.textContent = Math.round(scale * 100) + '%';
+  window.__viewScale = scale;
+}
+
+function fitToView() {
+  const W = canvasWrap.clientWidth;
+  const H = canvasWrap.clientHeight;
+  const pad = 60;
+  const sx = (W - pad*2) / CANVAS_W;
+  const sy = (H - pad*2) / CANVAS_H;
+  scale = Math.min(sx, sy);
+  tx = (W - CANVAS_W * scale) / 2;
+  ty = (H - CANVAS_H * scale) / 2;
+  applyTransform();
+}
+
+function zoomAtPoint(newScale, px, py) {
+  newScale = Math.max(minScale, Math.min(maxScale, newScale));
+  // keep point under cursor stationary
+  const wx = (px - tx) / scale;
+  const wy = (py - ty) / scale;
+  scale = newScale;
+  tx = px - wx * scale;
+  ty = py - wy * scale;
+  applyTransform();
+}
+
+canvasWrap.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const rect = canvasWrap.getBoundingClientRect();
+  const px = e.clientX - rect.left;
+  const py = e.clientY - rect.top;
+  const delta = -e.deltaY * 0.0015;
+  zoomAtPoint(scale * Math.exp(delta), px, py);
+}, { passive: false });
+
+let isDragging = false;
+let dragStart = { x: 0, y: 0, tx: 0, ty: 0 };
+canvasWrap.addEventListener('mousedown', (e) => {
+  if (e.target.closest('.node')) return;
+  isDragging = true;
+  canvasWrap.classList.add('dragging');
+  dragStart = { x: e.clientX, y: e.clientY, tx, ty };
+});
+window.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  tx = dragStart.tx + (e.clientX - dragStart.x);
+  ty = dragStart.ty + (e.clientY - dragStart.y);
+  applyTransform();
+});
+window.addEventListener('mouseup', () => {
+  isDragging = false;
+  canvasWrap.classList.remove('dragging');
+});
+
+// toolbar buttons
+document.getElementById('btn-zoom-in').addEventListener('click', () => {
+  const W = canvasWrap.clientWidth, H = canvasWrap.clientHeight;
+  zoomAtPoint(scale * 1.25, W/2, H/2);
+});
+document.getElementById('btn-zoom-out').addEventListener('click', () => {
+  const W = canvasWrap.clientWidth, H = canvasWrap.clientHeight;
+  zoomAtPoint(scale / 1.25, W/2, H/2);
+});
+document.getElementById('btn-fit').addEventListener('click', fitToView);
+document.getElementById('btn-reset').addEventListener('click', () => {
+  // focus on home at ~80%
+  scale = 0.7;
+  const home = nodeById.home;
+  const W = canvasWrap.clientWidth, H = canvasWrap.clientHeight;
+  tx = W/2 - home.x * scale;
+  ty = H/2 - home.y * scale;
+  applyTransform();
+});
+
+/* ========= IMAGE EDIT MODE ========= */
+const btnEdit = document.getElementById('btn-edit');
+let editMode = false;
+
+btnEdit.addEventListener('click', () => {
+  editMode = !editMode;
+  document.body.classList.toggle('edit-mode', editMode);
+  btnEdit.classList.toggle('active', editMode);
+  btnEdit.textContent = editMode ? '✓ Fine modifica' : '✎ Modifica immagini';
+  if (editMode) {
+    infobar.innerHTML = `
+      <div class="label" style="color:#FF7820;">Modalità modifica immagini</div>
+      <div class="title" style="font-size:13px;">Adatta gli screenshot</div>
+      <div class="hint">Trascina per spostare · Rotella per zoom · Doppio click per reset</div>`;
+  } else {
+    clearHighlight();
+  }
+});
+
+// per-image drag / zoom / dblclick-reset — handlers live on nodesGroup, gated by editMode
+let imgDrag = null;
+
+nodesGroup.addEventListener('mousedown', (e) => {
+  if (!editMode) return;
+  const img = e.target.closest('.node-thumb img');
+  if (!img) return;
+  e.stopPropagation();
+  e.preventDefault();
+  const thumb = img.parentElement;
+  thumb.classList.add('editing');
+  const tX = parseFloat(img.dataset.tx) || 0;
+  const tY = parseFloat(img.dataset.ty) || 0;
+  const tS = parseFloat(img.dataset.ts) || 1;
+  // screen-space delta is in *wrapper* pixels; since outer canvas is scaled,
+  // divide by current canvas scale so dragging feels 1:1 at the image's size
+  imgDrag = { img, startX: e.clientX, startY: e.clientY, tX, tY, tS, thumb };
+}, true);
+
+window.addEventListener('mousemove', (e) => {
+  if (!imgDrag) return;
+  e.preventDefault();
+  const dx = (e.clientX - imgDrag.startX) / scale;
+  const dy = (e.clientY - imgDrag.startY) / scale;
+  const t = { x: imgDrag.tX + dx, y: imgDrag.tY + dy, s: imgDrag.tS };
+  applyImgTransform(imgDrag.img, t);
+}, true);
+
+window.addEventListener('mouseup', () => {
+  if (!imgDrag) return;
+  const img = imgDrag.img;
+  imgDrag.thumb.classList.remove('editing');
+  const t = {
+    x: parseFloat(img.dataset.tx) || 0,
+    y: parseFloat(img.dataset.ty) || 0,
+    s: parseFloat(img.dataset.ts) || 1,
+  };
+  saveImgTransform(img.dataset.nodeId, t);
+  imgDrag = null;
+}, true);
+
+// wheel-zoom while in edit-mode zooms the IMAGE, not the canvas
+nodesGroup.addEventListener('wheel', (e) => {
+  if (!editMode) return;
+  const img = e.target.closest('.node-thumb img');
+  if (!img) return;
+  e.stopPropagation();
+  e.preventDefault();
+  const tS = parseFloat(img.dataset.ts) || 1;
+  const newS = Math.max(0.3, Math.min(5, tS * Math.exp(-e.deltaY * 0.0015)));
+  const t = {
+    x: parseFloat(img.dataset.tx) || 0,
+    y: parseFloat(img.dataset.ty) || 0,
+    s: newS,
+  };
+  applyImgTransform(img, t);
+  saveImgTransform(img.dataset.nodeId, t);
+}, { passive: false, capture: true });
+
+// double-click resets an image
+nodesGroup.addEventListener('dblclick', (e) => {
+  if (!editMode) return;
+  const img = e.target.closest('.node-thumb img');
+  if (!img) return;
+  e.stopPropagation();
+  const t = { x: 0, y: 0, s: 1 };
+  applyImgTransform(img, t);
+  saveImgTransform(img.dataset.nodeId, t);
+});
+
+/* ========= NODE INTERACTIONS ========= */
+let activeNodeId = null;
+const infobar = document.getElementById('infobar');
+
+function highlightNode(id) {
+  activeNodeId = id;
+  // find neighbors
+  const neighbors = new Set([id]);
+  LINKS_RAW.forEach(l => {
+    if (l.s === id) neighbors.add(l.t);
+    if (l.t === id) neighbors.add(l.s);
+  });
+  // node visuals
+  nodesGroup.querySelectorAll('.node').forEach(el => {
+    el.classList.toggle('dimmed', !neighbors.has(el.dataset.id));
+    el.classList.toggle('active', el.dataset.id === id);
+  });
+  // link visuals
+  linkPaths.forEach(lp => {
+    const relevant = lp.s === id || lp.t === id;
+    lp.el.classList.toggle('highlight', relevant);
+    lp.el.classList.toggle('dimmed', !relevant);
+    if (relevant) {
+      lp.el.setAttribute('marker-end', 'url(#arrow-highlight)');
+    } else {
+      // restore original marker based on link weight
+      lp.el.setAttribute('marker-end',
+        lp.el.classList.contains('primary')    ? 'url(#arrow-primary)' :
+        lp.el.classList.contains('footer-link')? 'url(#arrow-footer)'  :
+                                                 'url(#arrow-secondary)');
+    }
+  });
+  // infobar
+  const n = nodeById[id];
+  const outgoing = LINKS_RAW.filter(l => l.s === id).length;
+  const incoming = LINKS_RAW.filter(l => l.t === id).length;
+  infobar.innerHTML = `
+    <div class="label">${SECTIONS[n.section].label}</div>
+    <div class="title">${n.label}</div>
+    <div class="url">rijksmuseum.nl${n.url}</div>
+    <div style="margin-top:8px;font-size:11px;color:var(--ink-3);font-family:'JetBrains Mono',monospace;">
+      ↗ ${outgoing} out · ↘ ${incoming} in
+    </div>`;
+}
+
+function clearHighlight() {
+  activeNodeId = null;
+  nodesGroup.querySelectorAll('.node').forEach(el => {
+    el.classList.remove('dimmed', 'active');
+  });
+  linkPaths.forEach(lp => {
+    lp.el.classList.remove('highlight', 'dimmed');
+    // restore original marker
+    lp.el.setAttribute('marker-end',
+      lp.el.classList.contains('primary')    ? 'url(#arrow-primary)' :
+      lp.el.classList.contains('footer-link')? 'url(#arrow-footer)'  :
+                                               'url(#arrow-secondary)');
+  });
+  infobar.innerHTML = `
+    <div class="label">Pagina selezionata</div>
+    <div class="hint">Clicca una miniatura per vederne dettagli e connessioni.</div>`;
+}
+
+nodesGroup.addEventListener('click', (e) => {
+  const node = e.target.closest('.node');
+  if (!node) return;
+  if (activeNodeId === node.dataset.id) {
+    clearHighlight();
+  } else {
+    highlightNode(node.dataset.id);
+  }
+});
+
+canvasWrap.addEventListener('click', (e) => {
+  if (!e.target.closest('.node') && activeNodeId) {
+    clearHighlight();
+  }
+});
+
+/* ========= INIT ========= */
+window.addEventListener('load', () => {
+  fitToView();
+});
+window.addEventListener('resize', () => {
+  // keep scale, reclamp
+  applyTransform();
+});
+</script>
+
+
+</body></html>
