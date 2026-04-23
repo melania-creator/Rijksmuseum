@@ -1307,6 +1307,7 @@ LINKS_RAW.forEach(l => {
 /* ========= LEGEND POPULATION ========= */
 const legendGrid = document.getElementById('legend-grid');
 Object.entries(SECTIONS).forEach(([k, v]) => {
+  if (k === 'home') return;
   const el = document.createElement('div');
   el.className = 'legend-item';
   el.innerHTML = `<div class="legend-swatch" style="background:${v.color}"></div><span>${v.label}</span>`;
