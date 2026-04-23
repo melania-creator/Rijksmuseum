@@ -870,7 +870,7 @@ const SECTIONS = {
 const NODES = [
   // ===== HOME (centro) =====
   { id:'home', label:'Home', url:'/en', section:'home', size:'xxl',
-    x: 1900, y: 1450, thumb:'img_small/01_home.jpg' },
+    x: 1900, y: 1650, thumb:'img_small/01_home.jpg' },
 
   // ===== VISIT & TICKETS (in alto a sinistra) =====
   { id:'visit',         label:'Visit',                   url:'/en/visit',                                        section:'visit', size:'xl', x: 700,  y: 400,  thumb:'img_small/02_visit.jpg' },
@@ -1593,7 +1593,12 @@ canvasWrap.addEventListener('click', (e) => {
 
 /* ========= INIT ========= */
 window.addEventListener('load', () => {
-  fitToView();
+  scale = 0.7;
+  const home = nodeById.home;
+  const W = canvasWrap.clientWidth, H = canvasWrap.clientHeight;
+  tx = W/2 - home.x * scale;
+  ty = H/2 - home.y * scale;
+  applyTransform();
 });
 window.addEventListener('resize', () => {
   // keep scale, reclamp
